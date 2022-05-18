@@ -1,0 +1,27 @@
+spring:
+  datasource: 
+    url: jdbc:mysql://localhost:3306/portfolio-ap?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver 
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect      
+  thymeleaf:
+    cache: false 
+server:
+  error:
+    whitelabel:
+      enabled: false
+  servlet:
+    session:
+      cookie:
+        http-only: true
+      tracking-modes:
+      - cookie
+  port: 8080 # This is the default port anyway, but you can change it here
+
