@@ -42,9 +42,18 @@ public class ExperienciaController {
         
     }
     
-    @PutMapping("/update")
-    public ResponseEntity<Experiencia> update(@RequestBody Experiencia experiencia) {
-        experienciaService.save(experiencia); 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Experiencia> update(@PathVariable Long id, @RequestBody Experiencia e) {
+        
+    	Experiencia experiencia = experienciaService.findById(id);
+    	
+    	experiencia.setEmpresa(e.getEmpresa());
+    	experiencia.setCargo(e.getCargo());
+    	experiencia.setFechaInicio(e.getFechaInicio());
+    	experiencia.setFechaFin(e.getFechaFin());
+    	experiencia.setImgEmpresa(e.getImgEmpresa());
+    	
+    	experienciaService.save(experiencia); 
         
         return ResponseEntity.status(HttpStatus.OK).body(experiencia);
 
@@ -58,3 +67,4 @@ public class ExperienciaController {
     }
 	
 }
+

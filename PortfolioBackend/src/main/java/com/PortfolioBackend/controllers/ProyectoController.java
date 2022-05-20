@@ -21,7 +21,7 @@ import com.PortfolioBackend.models.Proyecto;
 import com.PortfolioBackend.services.ProyectoService;
 
 @RestController
-@RequestMapping("/proyectos")
+@RequestMapping("/proyecto")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ProyectoController {
 
@@ -42,9 +42,17 @@ public class ProyectoController {
         
     }
     
-    @PutMapping("/update")
-    public ResponseEntity<Proyecto> update(@RequestBody Proyecto proyecto) {
-        proyectoService.save(proyecto); 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Proyecto> update(@PathVariable Long id, @RequestBody Proyecto p) {
+        
+    	Proyecto proyecto = proyectoService.findById(id);
+    	
+    	proyecto.setNombre(p.getNombre());
+    	proyecto.setDescripcion(p.getDescripcion());
+    	proyecto.setImgProyecto(p.getImgProyecto());
+    	proyecto.setUrlProyecto(p.getUrlProyecto());
+    	
+    	proyectoService.save(proyecto); 
         
         return ResponseEntity.status(HttpStatus.OK).body(proyecto);
 

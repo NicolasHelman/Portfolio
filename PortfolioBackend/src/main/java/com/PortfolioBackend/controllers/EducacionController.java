@@ -42,8 +42,17 @@ public class EducacionController {
         
     }
     
-    @PutMapping("/update")
-    public ResponseEntity<Educacion> update(@RequestBody Educacion educacion) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Educacion> update(@PathVariable Long id, @RequestBody Educacion e) {
+    	
+    	Educacion educacion = educacionService.findById(id);
+    	
+    	educacion.setInstitucion(e.getInstitucion());
+    	educacion.setTitulo(e.getTitulo());
+    	educacion.setFechaInicio(e.getFechaInicio());
+    	educacion.setFechaFin(e.getFechaFin());
+    	educacion.setImgInstitucion(e.getImgInstitucion());
+    	
     	educacionService.save(educacion);
         
         return ResponseEntity.status(HttpStatus.OK).body(educacion);
@@ -58,3 +67,4 @@ public class EducacionController {
     }
 	
 }
+

@@ -20,7 +20,7 @@ import com.PortfolioBackend.models.Habilidad;
 import com.PortfolioBackend.services.HabilidadService;
 
 @RestController
-@RequestMapping("/habilidades")
+@RequestMapping("/habilidad")
 @CrossOrigin(origins = "http://localhost:4200")
 public class HabilidadController {
 	
@@ -35,15 +35,22 @@ public class HabilidadController {
 	
     @PostMapping("/save")
     public ResponseEntity<Habilidad> save(@RequestBody Habilidad habilidad) {
+    	
     	habilidadService.save(habilidad);
         
         return ResponseEntity.status(HttpStatus.CREATED).body(habilidad);
         
     }
     
-    @PutMapping("/update")
-    public ResponseEntity<Habilidad> update(@RequestBody Habilidad habilidad) {
-        habilidadService.save(habilidad); 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Habilidad> update(@PathVariable Long id, @RequestBody Habilidad h) {
+        
+    	Habilidad habilidad = habilidadService.findById(id);
+    	
+    	habilidad.setTipo(h.getTipo());
+    	habilidad.setPorcentaje(h.getPorcentaje());
+    	
+    	habilidadService.save(habilidad); 
         
         return ResponseEntity.status(HttpStatus.OK).body(habilidad);
 
@@ -57,3 +64,4 @@ public class HabilidadController {
     }
 		
 }
+
