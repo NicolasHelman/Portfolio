@@ -1,0 +1,78 @@
+<section id="acerca-de" class="acerca-de animacion">
+    <div class="container">
+
+        <div class="section-title">
+            <div class="d-flex">
+                <h2>Acerca de mí</h2>
+                <a (click)="dataForm()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#AcercaDeModal"><i class="fas fa-edit"></i></a>
+            </div>
+            <p>{{acercaDe.descripcion}}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul>
+                            <li><i class="fas fa-calendar-alt"></i> <strong>Fecha de Nacimiento:</strong> <span>{{acercaDe.fechaNacimiento | date: 'dd/MM/yyyy':'UTC'}}</span></li>
+                            <li><i class="fas fa-map-marker"></i> <strong>Ciudad:</strong> <span>{{acercaDe.ciudad}}</span></li>
+                            <li><i class="fas fa-phone"></i> <strong>Teléfono:</strong> <span>{{acercaDe.telefono}}</span></li>
+                            <li><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>{{acercaDe.mail}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <div class="social-links mt-3">
+            <a href="{{acercaDe.linkedIn}}" target="_blank" class=""><i class="fab fa-linkedin"></i></a>
+            <a href="{{acercaDe.github}}" target="_blank" class=""><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade form-modal" id="AcercaDeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="text-light">Acerca de mí</h5>
+            <button id="closeModalAcercaDe" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>               
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div>
+                    <label for="descripcion" class="col-form-label text-light">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
+                </div>
+                <div>
+                    <label for="fechaNacimiento" class="col-form-label text-light">Fecha de nacimiento:</label>
+                    <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+                </div>
+                <div>
+                    <label for="ciudad" class="col-form-label text-light">Ciudad:</label>
+                    <input type="text" class="form-control" id="ciudad" formControlName="ciudad">
+                </div>
+                <div>
+                    <label for="telefono" class="col-form-label text-light">Teléfono:</label>
+                    <input type="number" class="form-control" id="telefono" formControlName="telefono">
+                </div>
+                <div>
+                    <label for="mail" class="col-form-label text-light">Email:</label>
+                    <input type="email" class="form-control" id="mail" formControlName="mail">
+                </div>
+                <div>
+                    <label for="github" class="col-form-label text-light">GitHub (Url):</label>
+                    <input type="text" class="form-control" id="github" formControlName="github">
+                </div>
+                <div>
+                    <label for="linkedIn" class="col-form-label text-light">LinkedIn (Url):</label>
+                    <input type="text" class="form-control" id="linkedIn" formControlName="linkedIn">
+                </div>
+                <div class="modal-footer mt-4">
+                    <button (click)="newAcercaDe()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>

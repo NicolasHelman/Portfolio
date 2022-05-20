@@ -1,0 +1,68 @@
+<section id="proyectos" class="proyectos animacion">
+    <div class="container">
+
+        <div class="section-title">
+            <div class="d-flex">
+                <h2>Proyectos</h2>
+                <a (click)="nuevoProyecto()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ProyectoModal"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+
+        <div class="row proyectos-container" data-aos="fade-up" data-aos-delay="100">
+            <div *ngFor="let proyecto of listProyecto" class="col-lg-4 col-md-6 proyectos-item filter-app">
+                <div class="proyectos-wrap">
+                    <img src="{{proyecto.imgProyecto}}" class="img-fluid" alt="">
+                    <div class="proyectos-info">
+                        <div class="d-flex opciones">
+                            <a (click)="editarProyecto(proyecto)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ProyectoModal"><i class="fas fa-edit"></i></a>
+                            <a (click)="eliminarProyecto(proyecto.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                        <h4>{{proyecto.nombre}}</h4>
+                        <p>{{proyecto.descripcion}}</p>
+                        <div class="proyectos-links">
+                            <a href="{{proyecto.urlProyecto}}" target="_blank" data-gallery="proyectosDetailsGallery" data-glightbox="type: external" class="proyectos-details-lightbox" title="Ver Proyecto"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>       
+    </div>
+</section>
+
+<div class="modal fade form-modal" id="ProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Proyecto</h5>
+                <button id="closeModalProyecto" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>               
+            <div class="modal-body">
+                <form [formGroup]="form">
+                    <div>
+                        <label for="nombreProyecto" class="col-form-label text-light">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreProyecto" formControlName="nombre">
+                    </div>
+                    <div>
+                        <label for="descripcionProyecto" class="col-form-label text-light">Descripción:</label>
+                        <input type="text" class="form-control" id="descripcionProyecto" formControlName="descripcion">
+                    </div>
+                    <div>
+                        <label for="imgProyecto" class="col-form-label text-light">Foto del proyecto:</label>
+                        <input type="text" class="form-control" id="imgProyecto" formControlName="imgProyecto">
+                    </div>
+                    <div>
+                        <label for="urlProyecto" class="col-form-label text-light">Url del proyecto:</label>
+                        <input type="text" class="form-control" id="urlProyecto" formControlName="urlProyecto">
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="newProyecto()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>

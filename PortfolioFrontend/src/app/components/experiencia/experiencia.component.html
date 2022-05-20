@@ -1,0 +1,68 @@
+<section id="experiencia" class="experiencia animacion">
+    <div class="container">
+
+        <div class="section-title">
+            <div class="d-flex">
+                <h2>Experiencia</h2>
+                <a (click)="nuevoExperiencia()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ExperienciaModal"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div *ngFor="let experiencia of listExperiencia" class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
+                <div class="d-flex opciones">
+                    <a (click)="editarExperiencia(experiencia)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ExperienciaModal"><i class="fas fa-edit"></i></a>
+                    <a (click)="eliminarExperiencia(experiencia.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                <div class="icon">
+                    <img src="{{experiencia.imgEmpresa}}" alt="">
+                </div>
+                <h4 class="title"><a href="">{{experiencia.empresa}}</a></h4>
+                <p class="description">{{experiencia.cargo}}</p>
+                <p class="fecha">{{experiencia.fechaInicio | date: 'dd/MM/yyyy':'UTC'}} - {{experiencia.fechaFin | date: 'dd/MM/yyyy':'UTC'}}</p>
+            </div>
+        </div> 
+
+    </div>
+</section>
+
+<div class="modal fade form-modal" id="ExperienciaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Experiencia</h5>
+                <button id="closeModalExperiencia" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>               
+            <div class="modal-body">
+                <form [formGroup]="form">
+                    <div>
+                        <label for="empresa" class="col-form-label text-light">Empresa:</label>
+                        <input type="text" class="form-control" id="empresa" formControlName="empresa">
+                    </div>
+                    <div>
+                        <label for="cargoEmpresa" class="col-form-label text-light">Cargo:</label>
+                        <input type="text" class="form-control" id="cargoEmpresa" formControlName="cargo">
+                    </div>
+                    <div>
+                        <label for="fechaInicioExperiencia" class="col-form-label text-light">Fecha inicio:</label>
+                        <input type="date" class="form-control" id="fechaInicioExperiencia" formControlName="fechaInicio">
+                    </div>
+                    <div>
+                        <label for="fechaFinExperiencia" class="col-form-label text-light">Fecha fin:</label>
+                        <input type="date" class="form-control" id="fechaFinExperiencia" formControlName="fechaFin">
+                    </div>
+                    <div>
+                        <label for="imgEmpresa" class="col-form-label text-light">Foto de Empresa:</label>
+                        <input type="text" class="form-control" id="imgEmpresa" formControlName="imgEmpresa">
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="newExperiencia()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>

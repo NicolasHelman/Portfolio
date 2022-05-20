@@ -1,0 +1,59 @@
+<section id="habilidades" class="habilidades animacion">
+    <div class="container">
+
+        <div class="section-title">
+            <div class="d-flex">
+                <h2>Habilidades</h2>
+                <a (click)="nuevoHabilidad()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#HabilidadModal"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+
+        <div class="row habilidades-content">
+            <div *ngFor="let habilidad of listHabilidad" class="col-lg-6 col-md-6" data-aos="fade-up">
+                <div class="icon-box" data-aos="fade-up">
+                    <div class="d-flex opciones">
+                        <a (click)="editarHabilidad(habilidad)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#HabilidadModal"><i class="fas fa-edit"></i></a>
+                        <a (click)="eliminarHabilidad(habilidad.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+
+                    <div class="progress">
+                        <span class="skill">{{habilidad.tipo}} <i class="val">{{habilidad.porcentaje}}%</i></span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" role="progressbar" attr.aria-valuenow="{{habilidad.porcentaje}}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade form-modal" id="HabilidadModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Habilidad</h5>
+                <button id="closeModalHabilidad" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>               
+            <div class="modal-body">
+                <form [formGroup]="form">
+                    <div>
+                        <label for="tipo" class="col-form-label text-light">Tipo de habilidad:</label>
+                        <input type="text" class="form-control" id="tipo" formControlName="tipo">
+                    </div>
+                    <div>
+                        <label for="porcentaje" class="col-form-label text-light">Porcentaje de aprendizaje:</label>
+                        <input type="number" max="100" min="1" class="form-control" id="porcentaje" formControlName="porcentaje">
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="newHabilidad()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>

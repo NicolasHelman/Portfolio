@@ -18,11 +18,11 @@ export class HabilidadService {
     return this.httpClient.get<Habilidad[]>(this.habilidadURL+'list');
   }
 
-  public save(habilidad:Habilidad):Observable<any>{
+  public save(habilidad:any):Observable<any>{
     return this.httpClient.post<any>(this.habilidadURL+'save', habilidad);
   }
 
-  public update(id:number, habilidad:Habilidad):Observable<any>{
+  public update(id:number, habilidad:any):Observable<any>{
     return this.httpClient.put<any>(this.habilidadURL+'update/'+id, habilidad);
   }
 

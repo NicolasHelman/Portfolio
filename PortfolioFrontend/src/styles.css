@@ -382,7 +382,7 @@ section {
     font-size: 28px;
     line-height: 36px;
   }
-  #inicio h2 {
+  #inicio p {
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 30px;
@@ -415,6 +415,12 @@ section {
   }
   .acerca-de .content ul strong {
     margin-right: 10px;
+    transition: all 0.5s;
+  }
+  .acerca-de .content ul strong:hover {
+    transform: translateY(-3px);
+    cursor: pointer;
+    color: var(--color-principal);
   }
   .acerca-de .content ul i {
     font-size: 16px;
@@ -484,8 +490,8 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   transition: all 0.5s;
 }
@@ -497,7 +503,7 @@ section {
   font-size: 24px;
   line-height: 0;
   width: 100%;
-  height: 50px;
+  height: 60px;
 }
 .educacion .title {
   margin-left: 80px;
@@ -563,8 +569,8 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   transition: all 0.5s;
 }
@@ -576,7 +582,7 @@ section {
   font-size: 24px;
   line-height: 0;
   width: 100%;
-  height: 50px;
+  height: 60px;
 }
 .experiencia .title {
   margin-left: 80px;
@@ -713,6 +719,7 @@ section {
   overflow: hidden;
   z-index: 1;
   background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
 }
 .proyectos .proyectos-wrap::before {
   content: "";
@@ -908,7 +915,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Modal-AcercaDe
+# Modal
 --------------------------------------------------------------*/
 .form-modal .modal-body {
   width: 60%;

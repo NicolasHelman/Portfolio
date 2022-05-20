@@ -18,11 +18,11 @@ export class ProyectoService {
     return this.httpClient.get<Proyecto[]>(this.proyectoURL+'list');
   }
 
-  public save(proyecto:Proyecto):Observable<any>{
+  public save(proyecto:any):Observable<any>{
     return this.httpClient.post<any>(this.proyectoURL+'save', proyecto);
   }
 
-  public update(id:number, proyecto:Proyecto):Observable<any>{
+  public update(id:number, proyecto:any):Observable<any>{
     return this.httpClient.put<any>(this.proyectoURL+'update/'+id, proyecto);
   }
 
