@@ -4,14 +4,14 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Educación</h2>
-                <a (click)="nuevoEducacion()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EducacionModal"><i class="fas fa-plus-square"></i></a>
+                <a (click)="nuevoEducacion()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoEducacionModal"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
 
         <div class="row" >
             <div *ngFor="let educacion of listEducacion" class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
                 <div class="d-flex opciones">
-                    <a (click)="editarEducacion(educacion)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EducacionModal"><i class="fas fa-edit"></i></a>
+                    <a (click)="editarEducacion(educacion)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarEducacionModal"><i class="fas fa-edit"></i></a>
                     <a (click)="eliminarEducacion(educacion.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
                 </div>
                 <div class="icon">
@@ -26,39 +26,82 @@
     </div>
 </section>
 
-<div class="modal fade form-modal" id="EducacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- MODAL NUEVO -->
+<div class="modal fade form-modal" id="NuevoEducacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             
             <div class="modal-header">
-                <h5 class="text-light">Educación</h5>
-                <button id="closeModalEducacion" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="text-light">Nueva Educación</h5>
+                <button id="closeNuevoModalEducacion" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>               
             <div class="modal-body">
-                <form [formGroup]="form">
+                <form [formGroup]="formNuevo">
                     <div>
-                        <label for="institucion" class="col-form-label text-light">Institución:</label>
-                        <input type="text" class="form-control" id="institucion" formControlName="institucion">
+                        <label for="institucionEducacionNuevo" class="col-form-label text-light">Institución:</label>
+                        <input type="text" class="form-control" id="institucionEducacionNuevo" formControlName="institucion">
                     </div>
                     <div>
-                        <label for="titulo" class="col-form-label text-light">Título:</label>
-                        <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                        <label for="tituloEducacionNuevo" class="col-form-label text-light">Título:</label>
+                        <input type="text" class="form-control" id="tituloEducacionNuevo" formControlName="titulo">
                     </div>
                     <div>
-                        <label for="fechaInicioEducacion" class="col-form-label text-light">Fecha inicio:</label>
-                        <input type="date" class="form-control" id="fechaInicioEducacion" formControlName="fechaInicio">
+                        <label for="fechaInicioEducacionNuevo" class="col-form-label text-light">Fecha inicio:</label>
+                        <input type="date" class="form-control" id="fechaInicioEducacionNuevo" formControlName="fechaInicio">
                     </div>
                     <div>
-                        <label for="fechaFinEducacion" class="col-form-label text-light">Fecha fin:</label>
-                        <input type="date" class="form-control" id="fechaFinEducacion" formControlName="fechaFin">
+                        <label for="fechaFinEducacionNuevo" class="col-form-label text-light">Fecha fin:</label>
+                        <input type="date" class="form-control" id="fechaFinEducacionNuevo" formControlName="fechaFin">
                     </div>
                     <div>
-                        <label for="imgInstitucion" class="col-form-label text-light">Foto de Institución:</label>
-                        <input type="text" class="form-control" id="imgInstitucion" formControlName="imgInstitucion">
+                        <label for="imgInstitucionEducacionNuevo" class="col-form-label text-light">Foto de Institución:</label>
+                        <input type="text" class="form-control" id="imgInstitucionEducacionNuevo" formControlName="imgInstitucion">
                     </div>
                     <div class="modal-footer mt-4">
-                        <button (click)="newEducacion()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                        <button (click)="submitEducacion()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade form-modal" id="EditarEducacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Editar Educación</h5>
+                <button id="closeEditarModalEducacion" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>               
+            <div class="modal-body">
+                <form [formGroup]="formEditar">
+                    <div>
+                        <label for="institucionEducacionEditar" class="col-form-label text-light">Institución:</label>
+                        <input type="text" class="form-control" id="institucionEducacionEditar" formControlName="institucion">
+                    </div>
+                    <div>
+                        <label for="tituloEducacionEditar" class="col-form-label text-light">Título:</label>
+                        <input type="text" class="form-control" id="tituloEducacionEditar" formControlName="titulo">
+                    </div>
+                    <div>
+                        <label for="fechaInicioEducacionEditar" class="col-form-label text-light">Fecha inicio:</label>
+                        <input type="date" class="form-control" id="fechaInicioEducacionEditar" formControlName="fechaInicio">
+                    </div>
+                    <div>
+                        <label for="fechaFinEducacionEditar" class="col-form-label text-light">Fecha fin:</label>
+                        <input type="date" class="form-control" id="fechaFinEducacionEditar" formControlName="fechaFin">
+                    </div>
+                    <div>
+                        <label for="imgInstitucionEducacionEditar" class="col-form-label text-light">Foto de Institución:</label>
+                        <input type="text" class="form-control" id="imgInstitucionEducacionEditar" formControlName="imgInstitucion">
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="submitEducacion()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>
                     </div>
                 </form>
             </div>

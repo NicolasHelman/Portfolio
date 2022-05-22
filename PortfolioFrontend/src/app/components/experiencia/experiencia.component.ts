@@ -12,7 +12,8 @@ import { ExperienciaService } from 'src/app/services/experiencia.service';
 export class ExperienciaComponent implements OnInit {
 
   listExperiencia!: Experiencia[];
-  form: FormGroup;
+  formNuevo: FormGroup;
+  formEditar: FormGroup;
   id: number | undefined;
   
   constructor(
@@ -20,13 +21,20 @@ export class ExperienciaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) {
-    this.form =  this.formBuilder.group({
+    this.formNuevo =  this.formBuilder.group({
       empresa: ["",[Validators.required]],
       cargo: ["", [Validators.required]],
       fechaInicio: ["", [Validators.required]],
       fechaFin: ["", [Validators.required]],
       imgEmpresa: ["", [Validators.required]]
-    })
+    });
+    this.formEditar =  this.formBuilder.group({
+      empresa: ["",[Validators.required]],
+      cargo: ["", [Validators.required]],
+      fechaInicio: ["", [Validators.required]],
+      fechaFin: ["", [Validators.required]],
+      imgEmpresa: ["", [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
@@ -41,19 +49,19 @@ export class ExperienciaComponent implements OnInit {
     )
   };
 
-  newExperiencia() {
-
-    const experiencia: any = {
-      empresa: this.form.get('empresa')?.value,
-      cargo: this.form.get('cargo')?.value,
-      fechaInicio: this.form.get('fechaInicio')?.value,
-      fechaFin: this.form.get('fechaFin')?.value,
-      imgEmpresa: this.form.get('imgEmpresa')?.value
-    }
+  submitExperiencia() {
 
     if(this.id == undefined){
+
+      const experienciaNuevo: any = {
+        empresa: this.formNuevo.get('empresa')?.value,
+        cargo: this.formNuevo.get('cargo')?.value,
+        fechaInicio: this.formNuevo.get('fechaInicio')?.value,
+        fechaFin: this.formNuevo.get('fechaFin')?.value,
+        imgEmpresa: this.formNuevo.get('imgEmpresa')?.value
+      }
    
-      this.experienciaService.save(experiencia).subscribe(data => {
+      this.experienciaService.save(experienciaNuevo).subscribe(data => {
 
         this.toastr.success('Experiencia registrada', 'Experiencia');
         this.closeForm();
@@ -63,9 +71,18 @@ export class ExperienciaComponent implements OnInit {
       })
 
     } else{
-      experiencia.id = this.id;
+
+      const experienciaEditar: any = {
+        empresa: this.formEditar.get('empresa')?.value,
+        cargo: this.formEditar.get('cargo')?.value,
+        fechaInicio: this.formEditar.get('fechaInicio')?.value,
+        fechaFin: this.formEditar.get('fechaFin')?.value,
+        imgEmpresa: this.formEditar.get('imgEmpresa')?.value
+      }
+
+      experienciaEditar.id = this.id;
       
-      this.experienciaService.update(this.id, experiencia).subscribe(data => {
+      this.experienciaService.update(this.id, experienciaEditar).subscribe(data => {
         
         this.toastr.info('Experiencia actualizada', 'Experiencia');
         this.closeForm();
@@ -83,7 +100,7 @@ export class ExperienciaComponent implements OnInit {
   editarExperiencia(experiencia: any) {
     this.id = experiencia.id;
 
-    this.form.patchValue({
+    this.formEditar.patchValue({
       empresa: experiencia.empresa,
       cargo: experiencia.cargo,
       fechaInicio: experiencia.fechaInicio,
@@ -101,9 +118,11 @@ export class ExperienciaComponent implements OnInit {
 
 
   closeForm(): void{
-    this.form.reset();
+    this.formNuevo.reset();
+    this.formEditar.reset();
+    document.getElementById("closeNuevoModalExperiencia")?.click();
+    document.getElementById("closeEditarModalExperiencia")?.click();
     this.list();
-    document.getElementById("closeModalExperiencia")?.click();
   }
 
 

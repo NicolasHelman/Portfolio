@@ -12,7 +12,8 @@ import { ProyectoService } from 'src/app/services/proyecto.service';
 export class ProyectoComponent implements OnInit {
 
   listProyecto!: Proyecto[];
-  form: FormGroup;
+  formNuevo: FormGroup;
+  formEditar: FormGroup;
   id: number | undefined;
 
   constructor(
@@ -20,7 +21,13 @@ export class ProyectoComponent implements OnInit {
     private formBuilder: FormBuilder, 
     private toastr: ToastrService
   ) {
-    this.form = this.formBuilder.group({
+    this.formNuevo = this.formBuilder.group({
+      nombre: ['',[Validators.required]],
+      descripcion: ['',[Validators.required]],
+      imgProyecto: ['',[Validators.required]],
+      urlProyecto: ['',[Validators.required]]
+    });
+    this.formEditar = this.formBuilder.group({
       nombre: ['',[Validators.required]],
       descripcion: ['',[Validators.required]],
       imgProyecto: ['',[Validators.required]],
@@ -40,18 +47,18 @@ export class ProyectoComponent implements OnInit {
     )
   };
 
-  newProyecto() {
-
-    const proyecto: any = {
-      nombre: this.form.get('nombre')?.value,
-      descripcion: this.form.get('descripcion')?.value,
-      imgProyecto: this.form.get('imgProyecto')?.value,
-      urlProyecto: this.form.get('urlProyecto')?.value
-    }
+  submitProyecto() {
 
     if(this.id == undefined){
+
+      const proyectoNuevo: any = {
+        nombre: this.formNuevo.get('nombre')?.value,
+        descripcion: this.formNuevo.get('descripcion')?.value,
+        imgProyecto: this.formNuevo.get('imgProyecto')?.value,
+        urlProyecto: this.formNuevo.get('urlProyecto')?.value
+      }
    
-      this.proyectoService.save(proyecto).subscribe(data => {
+      this.proyectoService.save(proyectoNuevo).subscribe(data => {
 
         this.toastr.success('Proyecto registrado', 'Proyecto');
         this.closeForm();
@@ -61,9 +68,17 @@ export class ProyectoComponent implements OnInit {
       })
 
     } else{
-      proyecto.id = this.id;
+
+      const proyectoEditar: any = {
+        nombre: this.formEditar.get('nombre')?.value,
+        descripcion: this.formEditar.get('descripcion')?.value,
+        imgProyecto: this.formEditar.get('imgProyecto')?.value,
+        urlProyecto: this.formEditar.get('urlProyecto')?.value
+      }
+
+      proyectoEditar.id = this.id;
       
-      this.proyectoService.update(this.id, proyecto).subscribe(data => {
+      this.proyectoService.update(this.id, proyectoEditar).subscribe(data => {
 
         this.toastr.info('Proyecto actualizado', 'Proyecto');       
         this.closeForm();
@@ -81,7 +96,7 @@ export class ProyectoComponent implements OnInit {
   editarProyecto(proyecto: any) {
     this.id = proyecto.id;
     
-    this.form.patchValue({
+    this.formEditar.patchValue({
       nombre: proyecto.nombre,
       descripcion: proyecto.descripcion,
       imgProyecto: proyecto.imgProyecto,
@@ -97,9 +112,11 @@ export class ProyectoComponent implements OnInit {
   }
 
   closeForm(): void{
-    this.form.reset();
+    this.formNuevo.reset();
+    this.formEditar.reset();
+    document.getElementById("closeNuevoModalProyecto")?.click();
+    document.getElementById("closeEditarModalProyecto")?.click();
     this.list();
-    document.getElementById("closeModalProyecto")?.click();
   }
 
 }

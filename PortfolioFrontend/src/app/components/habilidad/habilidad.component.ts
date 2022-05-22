@@ -12,7 +12,8 @@ import { HabilidadService } from 'src/app/services/habilidad.service';
 export class HabilidadComponent implements OnInit {
 
   listHabilidad!: Habilidad[];
-  form: FormGroup;
+  formNuevo: FormGroup;
+  formEditar: FormGroup;
   id: number | undefined;
   
   constructor(
@@ -20,10 +21,14 @@ export class HabilidadComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) {
-    this.form =  this.formBuilder.group({
+    this.formNuevo =  this.formBuilder.group({
       tipo: ["",[Validators.required]],
       porcentaje: ["", [Validators.required]]
-    })
+    });
+    this.formEditar =  this.formBuilder.group({
+      tipo: ["",[Validators.required]],
+      porcentaje: ["", [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
@@ -38,16 +43,16 @@ export class HabilidadComponent implements OnInit {
     )
   };
 
-  newHabilidad() {
-
-    const habilidad: any = {
-      tipo: this.form.get('tipo')?.value,
-      porcentaje: this.form.get('porcentaje')?.value
-    }
+  submitHabilidad() {
 
     if(this.id == undefined){
+
+      const habilidadNuevo: any = {
+        tipo: this.formNuevo.get('tipo')?.value,
+        porcentaje: this.formNuevo.get('porcentaje')?.value
+      }
    
-      this.habilidadService.save(habilidad).subscribe(data => {
+      this.habilidadService.save(habilidadNuevo).subscribe(data => {
 
         this.toastr.success('Habilidad registrada', 'Habilidad');
         this.closeForm();
@@ -57,9 +62,15 @@ export class HabilidadComponent implements OnInit {
       })
 
     } else{
-      habilidad.id = this.id;
+
+      const habilidadEditar: any = {
+        tipo: this.formEditar.get('tipo')?.value,
+        porcentaje: this.formEditar.get('porcentaje')?.value
+      }
+
+      habilidadEditar.id = this.id;
       
-      this.habilidadService.update(this.id, habilidad).subscribe(data => {
+      this.habilidadService.update(this.id, habilidadEditar).subscribe(data => {
         
         this.toastr.info('Habilidad actualizada', 'Habilidad');
         this.closeForm();
@@ -77,7 +88,7 @@ export class HabilidadComponent implements OnInit {
   editarHabilidad(habilidad: any) {
     this.id = habilidad.id;
 
-    this.form.patchValue({
+    this.formEditar.patchValue({
       tipo: habilidad.tipo,
       porcentaje: habilidad.porcentaje
     });
@@ -90,12 +101,12 @@ export class HabilidadComponent implements OnInit {
     })
   }
 
-
   closeForm(): void{
-    this.form.reset();
+    this.formNuevo.reset();
+    this.formEditar.reset();
+    document.getElementById("closeNuevoModalHabilidad")?.click();
+    document.getElementById("closeEditarModalHabilidad")?.click();
     this.list();
-    document.getElementById("closeModalHabilidad")?.click();
   }
-
 
 }

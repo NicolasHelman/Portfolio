@@ -4,7 +4,7 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Proyectos</h2>
-                <a (click)="nuevoProyecto()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ProyectoModal"><i class="fas fa-plus-square"></i></a>
+                <a (click)="nuevoProyecto()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoProyectoModal"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
 
@@ -14,13 +14,13 @@
                     <img src="{{proyecto.imgProyecto}}" class="img-fluid" alt="">
                     <div class="proyectos-info">
                         <div class="d-flex opciones">
-                            <a (click)="editarProyecto(proyecto)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#ProyectoModal"><i class="fas fa-edit"></i></a>
+                            <a (click)="editarProyecto(proyecto)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarProyectoModal"><i class="fas fa-edit"></i></a>
                             <a (click)="eliminarProyecto(proyecto.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
                         </div>
                         <h4>{{proyecto.nombre}}</h4>
                         <p>{{proyecto.descripcion}}</p>
                         <div class="proyectos-links">
-                            <a href="{{proyecto.urlProyecto}}" target="_blank" data-gallery="proyectosDetailsGallery" data-glightbox="type: external" class="proyectos-details-lightbox" title="Ver Proyecto"><i class="fas fa-link"></i></a>
+                            <a href="{{proyecto.urlProyecto}}" target="_blank" data-gallery="proyectosDetailsGallery" data-glightbox="type: external" class="proyectos-details-lightbox" title="Ver Proyecto"><i class="fas fa-link mt-3"></i></a>
                         </div>
                     </div>
                 </div>
@@ -30,35 +30,74 @@
     </div>
 </section>
 
-<div class="modal fade form-modal" id="ProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- MODAL NUEVO -->
+<div class="modal fade form-modal" id="NuevoProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             
             <div class="modal-header">
-                <h5 class="text-light">Proyecto</h5>
-                <button id="closeModalProyecto" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="text-light">Nuevo Proyecto</h5>
+                <button id="closeNuevoModalProyecto" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>               
             <div class="modal-body">
-                <form [formGroup]="form">
+                <form [formGroup]="formNuevo">
                     <div>
-                        <label for="nombreProyecto" class="col-form-label text-light">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreProyecto" formControlName="nombre">
+                        <label for="nombreProyectoNuevo" class="col-form-label text-light">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreProyectoNuevo" formControlName="nombre">
                     </div>
                     <div>
-                        <label for="descripcionProyecto" class="col-form-label text-light">Descripción:</label>
-                        <input type="text" class="form-control" id="descripcionProyecto" formControlName="descripcion">
+                        <label for="descripcionProyectoNuevo" class="col-form-label text-light">Descripción:</label>
+                        <input type="text" class="form-control" id="descripcionProyectoNuevo" formControlName="descripcion">
                     </div>
                     <div>
-                        <label for="imgProyecto" class="col-form-label text-light">Foto del proyecto:</label>
-                        <input type="text" class="form-control" id="imgProyecto" formControlName="imgProyecto">
+                        <label for="imgProyectoNuevo" class="col-form-label text-light">Foto del proyecto:</label>
+                        <input type="text" class="form-control" id="imgProyectoNuevo" formControlName="imgProyecto">
                     </div>
                     <div>
-                        <label for="urlProyecto" class="col-form-label text-light">Url del proyecto:</label>
-                        <input type="text" class="form-control" id="urlProyecto" formControlName="urlProyecto">
+                        <label for="urlProyectoNuevo" class="col-form-label text-light">Url del proyecto:</label>
+                        <input type="text" class="form-control" id="urlProyectoNuevo" formControlName="urlProyecto">
                     </div>
                     <div class="modal-footer mt-4">
-                        <button (click)="newProyecto()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                        <button (click)="submitProyecto()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade form-modal" id="EditarProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Editar Proyecto</h5>
+                <button id="closeEditarModalProyecto" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>               
+            <div class="modal-body">
+                <form [formGroup]="formEditar">
+                    <div>
+                        <label for="nombreProyectoEditar" class="col-form-label text-light">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreProyectoEditar" formControlName="nombre">
+                    </div>
+                    <div>
+                        <label for="descripcionProyectoEditar" class="col-form-label text-light">Descripción:</label>
+                        <input type="text" class="form-control" id="descripcionProyectoEditar" formControlName="descripcion">
+                    </div>
+                    <div>
+                        <label for="imgProyectoEditar" class="col-form-label text-light">Foto del proyecto:</label>
+                        <input type="text" class="form-control" id="imgProyectoEditar" formControlName="imgProyecto">
+                    </div>
+                    <div>
+                        <label for="urlProyectoEditar" class="col-form-label text-light">Url del proyecto:</label>
+                        <input type="text" class="form-control" id="urlProyectoEditar" formControlName="urlProyecto">
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="submitProyecto()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>
                     </div>
                 </form>
             </div>

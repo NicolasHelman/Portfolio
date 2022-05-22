@@ -12,7 +12,8 @@ import { EducacionService } from 'src/app/services/educacion.service';
 export class EducacionComponent implements OnInit {
 
   listEducacion!: Educacion[];
-  form: FormGroup;
+  formNuevo: FormGroup;
+  formEditar: FormGroup;
   id: number | undefined;
 
   constructor(
@@ -20,7 +21,14 @@ export class EducacionComponent implements OnInit {
     private formBuilder: FormBuilder, 
     private toastr: ToastrService
   ) {
-    this.form = this.formBuilder.group({
+    this.formNuevo = this.formBuilder.group({
+      institucion: ['',[Validators.required]],
+      titulo: ['',[Validators.required]],
+      fechaInicio: ['',[Validators.required]],
+      fechaFin: ['',[Validators.required]],
+      imgInstitucion: ['',[Validators.required]]
+    });
+    this.formEditar = this.formBuilder.group({
       institucion: ['',[Validators.required]],
       titulo: ['',[Validators.required]],
       fechaInicio: ['',[Validators.required]],
@@ -41,19 +49,19 @@ export class EducacionComponent implements OnInit {
     )
   };
 
-  newEducacion() {
-
-    const educacion: any = {
-      institucion: this.form.get('institucion')?.value,
-      titulo: this.form.get('titulo')?.value,
-      fechaInicio: this.form.get('fechaInicio')?.value,
-      fechaFin: this.form.get('fechaFin')?.value,
-      imgInstitucion: this.form.get('imgInstitucion')?.value
-    }
+  submitEducacion() {
 
     if(this.id == undefined){
+
+      const educacionNuevo: any = {
+        institucion: this.formNuevo.get('institucion')?.value,
+        titulo: this.formNuevo.get('titulo')?.value,
+        fechaInicio: this.formNuevo.get('fechaInicio')?.value,
+        fechaFin: this.formNuevo.get('fechaFin')?.value,
+        imgInstitucion: this.formNuevo.get('imgInstitucion')?.value
+      }
    
-      this.educacionService.save(educacion).subscribe(data => {
+      this.educacionService.save(educacionNuevo).subscribe(data => {
 
         this.toastr.success('Educación registrada', 'Educacion');
         this.closeForm();
@@ -63,11 +71,20 @@ export class EducacionComponent implements OnInit {
       })
 
     } else{
-      educacion.id = this.id;
-      
-      this.educacionService.update(this.id, educacion).subscribe(data => {
 
-        this.toastr.info('Educación actualizada', 'Educacion');       
+      const educacionEditar: any = {
+        institucion: this.formEditar.get('institucion')?.value,
+        titulo: this.formEditar.get('titulo')?.value,
+        fechaInicio: this.formEditar.get('fechaInicio')?.value,
+        fechaFin: this.formEditar.get('fechaFin')?.value,
+        imgInstitucion: this.formEditar.get('imgInstitucion')?.value
+      }
+
+      educacionEditar.id = this.id;
+      
+      this.educacionService.update(this.id, educacionEditar).subscribe(data => {
+
+        this.toastr.info('Educación actualizada', 'Educacion');
         this.closeForm();
 
       }, error => {
@@ -83,7 +100,7 @@ export class EducacionComponent implements OnInit {
   editarEducacion(educacion: any) {
     this.id = educacion.id;
     
-    this.form.patchValue({
+    this.formEditar.patchValue({
       institucion: educacion.institucion,
       titulo: educacion.titulo,
       fechaInicio: educacion.fechaInicio,
@@ -100,9 +117,11 @@ export class EducacionComponent implements OnInit {
   }
 
   closeForm(): void{
-    this.form.reset();
+    this.formNuevo.reset();
+    this.formEditar.reset();
+    document.getElementById("closeNuevoModalEducacion")?.click();
+    document.getElementById("closeEditarModalEducacion")?.click();
     this.list();
-    document.getElementById("closeModalEducacion")?.click();
   }
 
 }
