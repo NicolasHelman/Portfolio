@@ -28,14 +28,6 @@ public class AcercaDeController {
 	private AcercaDeService acercaDeService;
 	
 	@ResponseBody
-	@GetMapping("/{id}")
-    public ResponseEntity<AcercaDe> view(@PathVariable Long id) {
-		AcercaDe acercaDe = acercaDeService.findById(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(acercaDe);
-    }
-	
-	@ResponseBody
 	@GetMapping("/list")
     public List<AcercaDe> list() {
 		return acercaDeService.list();
@@ -43,20 +35,32 @@ public class AcercaDeController {
 
     @PostMapping("/save")
     public ResponseEntity<AcercaDe> save(@RequestBody AcercaDe acercaDe) {   
+    	
     	acercaDeService.save(acercaDe);
      
         return ResponseEntity.status(HttpStatus.CREATED).body(acercaDe);
         
     }
     
-    @PutMapping("/update")
-    public ResponseEntity<AcercaDe> update(@RequestBody AcercaDe acercaDe) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<AcercaDe> update(@PathVariable Long id, @RequestBody AcercaDe ad) {
+    	
+    	AcercaDe acercaDe = acercaDeService.findById(id);
+    	
+    	acercaDe.setDescripcion(ad.getDescripcion());
+    	acercaDe.setFechaNacimiento(ad.getFechaNacimiento());
+    	acercaDe.setCiudad(ad.getCiudad());
+    	acercaDe.setTelefono(ad.getTelefono());
+    	acercaDe.setMail(ad.getMail());
+    	acercaDe.setGithub(ad.getGithub());
+    	acercaDe.setLinkedIn(ad.getLinkedIn());
+    	
         acercaDeService.save(acercaDe); 
         
         return ResponseEntity.status(HttpStatus.OK).body(acercaDe);
 
     }
-    
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<AcercaDe> delete(@PathVariable Long id) {
     	acercaDeService.delete(id);
