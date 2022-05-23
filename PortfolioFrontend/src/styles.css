@@ -453,6 +453,15 @@ section {
   color: var(--color-blanco);
   text-decoration: none;
 }
+.acerca-de .opciones{
+  float: right;
+}
+.acerca-de .opciones i {
+  font-size: 16px;
+}
+.acerca-de .opciones i:hover {
+  color: var(--color-primario);
+}
 
 @media (min-width: 1024px) {
   .acerca-de {

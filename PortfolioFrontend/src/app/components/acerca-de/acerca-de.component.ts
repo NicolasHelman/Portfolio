@@ -12,15 +12,26 @@ import { AcercaDeService } from 'src/app/services/acerca-de.service';
 })
 export class AcercaDeComponent implements OnInit {
 
-  acercaDe!: AcercaDe;
-  form: FormGroup;
+  listAcercaDe!: AcercaDe[];
+  formNuevo: FormGroup;
+  formEditar: FormGroup;
+  id: number | undefined;
 
   constructor(
     private acercaDeService: AcercaDeService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) { 
-    this.form = this.formBuilder.group({
+    this.formNuevo = this.formBuilder.group({
+      descripcion: ['',[Validators.required]],
+      fechaNacimiento: ['',[Validators.required]],
+      ciudad: ['',[Validators.required]],
+      telefono: ['',[Validators.required,Validators.minLength(10)]],
+      mail: ['',[Validators.required]],
+      github: ['',[Validators.required]],
+      linkedIn: ['',[Validators.required]]
+    });
+    this.formEditar = this.formBuilder.group({
       descripcion: ['',[Validators.required]],
       fechaNacimiento: ['',[Validators.required]],
       ciudad: ['',[Validators.required]],
@@ -32,34 +43,34 @@ export class AcercaDeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.view();
+    this.list();
   }
 
-  view(): void {
-    this.acercaDeService.view().subscribe(
+  list(): void {
+    this.acercaDeService.list().subscribe(
       data => {
-        this.acercaDe = data;
+        this.listAcercaDe = data;
       }
     )
   };
 
-  newAcercaDe() {
-    if(this.form.valid){
-   
-      let descripcion = this.form.controls["descripcion"].value;
-      let fechaNacimiento = this.form.controls["fechaNacimiento"].value;
-      let ciudad = this.form.controls["ciudad"].value;
-      let telefono = this.form.controls["telefono"].value;
-      let mail = this.form.controls["mail"].value;
-      let github = this.form.controls["github"].value;
-      let linkedIn = this.form.controls["linkedIn"].value;
+  submitAcercaDe() {
+
+    if(this.id == undefined){
+
+      const acercaDeNuevo: any = {
+        descripcion: this.formNuevo.get('descripcion')?.value,
+        fechaNacimiento: this.formNuevo.get('fechaNacimiento')?.value,
+        ciudad: this.formNuevo.get('ciudad')?.value,
+        telefono: this.formNuevo.get('telefono')?.value,
+        mail: this.formNuevo.get('mail')?.value,
+        github: this.formNuevo.get('github')?.value,
+        linkedIn: this.formNuevo.get('linkedIn')?.value
+      }
     
-      let acercaDeEditar = new AcercaDe(this.acercaDe.id, descripcion, fechaNacimiento, ciudad, telefono, mail, github, linkedIn);
-    
-      this.acercaDeService.update(acercaDeEditar).subscribe(data=>{
-        this.acercaDe = acercaDeEditar;
-        this.toastr.info('Acerca De actualizado', 'Acerca De');
-        
+      this.acercaDeService.save(acercaDeNuevo).subscribe(data=>{
+
+        this.toastr.success('Acerca De registrado', 'Acerca De');     
         this.closeForm();
 
       }, error => {
@@ -67,23 +78,61 @@ export class AcercaDeComponent implements OnInit {
       })
 
     } else{
-      this.form.markAllAsTouched();
+
+      const acercaDeEditar: any = {
+        descripcion: this.formEditar.get('descripcion')?.value,
+        fechaNacimiento: this.formEditar.get('fechaNacimiento')?.value,
+        ciudad: this.formEditar.get('ciudad')?.value,
+        telefono: this.formEditar.get('telefono')?.value,
+        mail: this.formEditar.get('mail')?.value,
+        github: this.formEditar.get('github')?.value,
+        linkedIn: this.formEditar.get('linkedIn')?.value
+      }
+
+      acercaDeEditar.id = this.id;
+    
+      this.acercaDeService.update(this.id, acercaDeEditar).subscribe(data=>{
+
+        this.toastr.info('Acerca De actualizado', 'Acerca De');     
+        this.closeForm();
+
+      }, error => {
+        this.toastr.error('Ocurrió un error','Error');
+      })
     }
   }
 
-  dataForm(){
-    this.form.controls["descripcion"].setValue(this.acercaDe.descripcion);
-    this.form.controls["fechaNacimiento"].setValue(this.acercaDe.fechaNacimiento);
-    this.form.controls["ciudad"].setValue(this.acercaDe.ciudad);
-    this.form.controls["telefono"].setValue(this.acercaDe.telefono);
-    this.form.controls["mail"].setValue(this.acercaDe.mail);
-    this.form.controls["github"].setValue(this.acercaDe.github);
-    this.form.controls["linkedIn"].setValue(this.acercaDe.linkedIn);
+  nuevoAcercaDe() {
+    this.id = undefined;
+  }
+
+  editarAcercaDe(acercaDe: any) {
+    this.id = acercaDe.id;
+    
+    this.formEditar.patchValue({
+      descripcion: acercaDe.descripcion,
+      fechaNacimiento: acercaDe.fechaNacimiento,
+      ciudad: acercaDe.ciudad,
+      telefono: acercaDe.telefono,
+      mail: acercaDe.mail,
+      github: acercaDe.github,
+      linkedIn: acercaDe.linkedIn
+    })
+
+  }
+
+  eliminarAcercaDe(id: number){
+    this.acercaDeService.delete(id).subscribe(data => {
+      this.toastr.error('Acerca De eliminado','Acerca De');
+      this.list();
+    })
   }
 
   closeForm(): void{
-    this.form.reset();
-    document.getElementById("closeModalAcercaDe")?.click();
+    this.formNuevo.reset();
+    this.formEditar.reset();
+    document.getElementById('closeNuevoModalAcercaDe')?.click();
+    document.getElementById('closeEditarModalAcercaDe')?.click();
+    this.list();
   }
-
 }

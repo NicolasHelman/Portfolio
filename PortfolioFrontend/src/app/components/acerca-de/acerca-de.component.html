@@ -4,13 +4,22 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Acerca de mí</h2>
-                <a (click)="dataForm()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#AcercaDeModal"><i class="fas fa-edit"></i></a>
-            </div>
-            <p>{{acercaDe.descripcion}}</p>
+                <a *ngIf="listAcercaDe.length == 0" (click)="nuevoAcercaDe()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoAcercaDeModal"><i class="fas fa-plus-square"></i></a>
+            </div>               
         </div>
 
-        <div class="row">
-            <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+        <div *ngIf="listAcercaDe.length == 1" class="row">
+            <div *ngFor="let acercaDe of listAcercaDe" class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+
+                <div class="d-flex opciones">
+                    <a (click)="editarAcercaDe(acercaDe)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarAcercaDeModal"><i class="fas fa-edit"></i></a>
+                    <a (click)="eliminarAcercaDe(acercaDe.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
+                </div>
+
+                <div class="mb-4">
+                    <p>{{acercaDe.descripcion}}</p>
+                </div>
+
                 <div class="row">
                     <div class="col-lg-6">
                         <ul>
@@ -21,55 +30,107 @@
                         </ul>
                     </div>
                 </div>
+             
+                <div class="social-links mt-3">
+                    <a href="{{acercaDe.linkedIn}}" target="_blank" class=""><i class="fab fa-linkedin"></i></a>
+                    <a href="{{acercaDe.github}}" target="_blank" class=""><i class="fab fa-github"></i></a>
+                </div>
+
             </div>
         </div>    
 
-        <div class="social-links mt-3">
-            <a href="{{acercaDe.linkedIn}}" target="_blank" class=""><i class="fab fa-linkedin"></i></a>
-            <a href="{{acercaDe.github}}" target="_blank" class=""><i class="fab fa-github"></i></a>
-        </div>
     </div>
 </section>
 
-<div class="modal fade form-modal" id="AcercaDeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- MODAL NUEVO -->
+<div class="modal fade form-modal" id="NuevoAcercaDeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="text-light">Acerca de mí</h5>
-            <button id="closeModalAcercaDe" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="text-light">Nuevo Acerca de mí</h5>
+            <button id="closeNuevoModalAcercaDe" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>               
         <div class="modal-body">
-            <form [formGroup]="form">
+            <form [formGroup]="formNuevo">
                 <div>
-                    <label for="descripcion" class="col-form-label text-light">Descripción:</label>
-                    <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
+                    <label for="descripcionAcercaDeNuevo" class="col-form-label text-light">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcionAcercaDeNuevo" formControlName="descripcion">
                 </div>
                 <div>
-                    <label for="fechaNacimiento" class="col-form-label text-light">Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+                    <label for="fechaNacimientoAcercaDeNuevo" class="col-form-label text-light">Fecha de nacimiento:</label>
+                    <input type="date" class="form-control" id="fechaNacimientoAcercaDeNuevo" formControlName="fechaNacimiento">
                 </div>
                 <div>
-                    <label for="ciudad" class="col-form-label text-light">Ciudad:</label>
-                    <input type="text" class="form-control" id="ciudad" formControlName="ciudad">
+                    <label for="ciudadAcercaDeNuevo" class="col-form-label text-light">Ciudad:</label>
+                    <input type="text" class="form-control" id="ciudadAcercaDeNuevo" formControlName="ciudad">
                 </div>
                 <div>
-                    <label for="telefono" class="col-form-label text-light">Teléfono:</label>
-                    <input type="number" class="form-control" id="telefono" formControlName="telefono">
+                    <label for="telefonoAcercaDeNuevo" class="col-form-label text-light">Teléfono:</label>
+                    <input type="number" class="form-control" id="telefonoAcercaDeNuevo" formControlName="telefono">
                 </div>
                 <div>
-                    <label for="mail" class="col-form-label text-light">Email:</label>
-                    <input type="email" class="form-control" id="mail" formControlName="mail">
+                    <label for="mailAcercaDeNuevo" class="col-form-label text-light">Email:</label>
+                    <input type="email" class="form-control" id="mailAcercaDeNuevo" formControlName="mail">
                 </div>
                 <div>
-                    <label for="github" class="col-form-label text-light">GitHub (Url):</label>
-                    <input type="text" class="form-control" id="github" formControlName="github">
+                    <label for="githubAcercaDeNuevo" class="col-form-label text-light">GitHub (Url):</label>
+                    <input type="text" class="form-control" id="githubAcercaDeNuevo" formControlName="github">
                 </div>
                 <div>
-                    <label for="linkedIn" class="col-form-label text-light">LinkedIn (Url):</label>
-                    <input type="text" class="form-control" id="linkedIn" formControlName="linkedIn">
+                    <label for="linkedInAcercaDeNuevo" class="col-form-label text-light">LinkedIn (Url):</label>
+                    <input type="text" class="form-control" id="linkedInAcercaDeNuevo" formControlName="linkedIn">
                 </div>
                 <div class="modal-footer mt-4">
-                    <button (click)="newAcercaDe()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    <button (click)="submitAcercaDe()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade form-modal" id="EditarAcercaDeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="text-light">Editar Acerca de mí</h5>
+            <button id="closeEditarModalAcercaDe" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>               
+        <div class="modal-body">
+            <form [formGroup]="formEditar">
+                <div>
+                    <label for="descripcionAcercaDeEditar" class="col-form-label text-light">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcionAcercaDeEditar" formControlName="descripcion">
+                </div>
+                <div>
+                    <label for="fechaNacimientoAcercaDeEditar" class="col-form-label text-light">Fecha de nacimiento:</label>
+                    <input type="date" class="form-control" id="fechaNacimientoAcercaDeEditar" formControlName="fechaNacimiento">
+                </div>
+                <div>
+                    <label for="ciudadAcercaDeEditar" class="col-form-label text-light">Ciudad:</label>
+                    <input type="text" class="form-control" id="ciudadAcercaDeEditar" formControlName="ciudad">
+                </div>
+                <div>
+                    <label for="telefonoAcercaDeEditar" class="col-form-label text-light">Teléfono:</label>
+                    <input type="number" class="form-control" id="telefonoAcercaDeEditar" formControlName="telefono">
+                </div>
+                <div>
+                    <label for="mailAcercaDeEditar" class="col-form-label text-light">Email:</label>
+                    <input type="email" class="form-control" id="mailAcercaDeEditar" formControlName="mail">
+                </div>
+                <div>
+                    <label for="githubAcercaDeEditar" class="col-form-label text-light">GitHub (Url):</label>
+                    <input type="text" class="form-control" id="githubAcercaDeEditar" formControlName="github">
+                </div>
+                <div>
+                    <label for="linkedInAcercaDeEditar" class="col-form-label text-light">LinkedIn (Url):</label>
+                    <input type="text" class="form-control" id="linkedInAcercaDeEditar" formControlName="linkedIn">
+                </div>
+                <div class="modal-footer mt-4">
+                    <button (click)="submitAcercaDe()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>
                 </div>
             </form>
         </div>

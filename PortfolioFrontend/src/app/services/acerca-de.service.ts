@@ -14,23 +14,19 @@ export class AcercaDeService {
     private httpClient: HttpClient
   ) { }
 
-  public view():Observable<AcercaDe> {
-    return this.httpClient.get<AcercaDe>(this.acercaDeURL+'1');
-  }
-
   public list():Observable<AcercaDe[]> {
     return this.httpClient.get<AcercaDe[]>(this.acercaDeURL +'list');
   }
 
-  public save(acercaDe:AcercaDe):Observable<any>{
+  public save(acercaDe:any):Observable<any>{
     return this.httpClient.post<any>(this.acercaDeURL+'save', acercaDe);
   }
 
-  public update(acercaDe:AcercaDe):Observable<any>{
-    return this.httpClient.put<any>(this.acercaDeURL+'update', acercaDe);
+  public update(id:number, acercaDe:any):Observable<any>{
+    return this.httpClient.put<any>(this.acercaDeURL+'update/'+id,acercaDe);
   }
 
-  public delete(acercaDe:AcercaDe):Observable<any>{
-    return this.httpClient.delete<any>(this.acercaDeURL+'delete/1')
+  public delete(id:number):Observable<any>{
+    return this.httpClient.delete<any>(this.acercaDeURL+'delete/'+id)
   }
 }
