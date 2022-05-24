@@ -3,7 +3,8 @@
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  color: var(--color-negro);
+  color: var(--color-blanco);
+  background-color: var(--bg-dark);
 }
   
 a {
@@ -26,17 +27,15 @@ h1, h2, h3, h4, h5, h6 {
 :root {
 
   /*========== Colors ==========*/
-  --color-primario: #149ddd;
-  --color-secundario: #37b3ed;
-  --color-terciario: #173b6c;
+  --color-primario: #64F4AC;
+  --color-secundario: #4AD18C;
+  --color-terciario: #347f5a;
   --color-blanco: #fff;
   --color-negro: #111;
   --color-icon: #212431;
-  --bg-header: #040b14;
+  --bg-dark: #040b14;
   --text-header: #a8a9b4;
   --textsecond-header: #6f7180;
-  --bg-dark: #1f1f1f;
-  
 }
 
 /*--------------------------------------------------------------
@@ -47,16 +46,14 @@ Scroll Bar
   background-color: var(--color-blanco);
   border-radius: .5rem;
 }
-
 ::-webkit-scrollbar-thumb{
-  background-color: var(--color-blanco);
+  background-color: var(--color-primario);
   border-radius: .5rem;
 }
-
 ::-webkit-scrollbar-thumb:hover{
-  background-color: var(--color-primario);
+  background-color: var(--color-secundario);
 }
-  
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -67,7 +64,7 @@ Scroll Bar
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: var(--color-primario);
+  background: var(--color-terciario);
   width: 40px;
   height: 40px;
   border-radius: 50px;
@@ -79,8 +76,7 @@ Scroll Bar
   line-height: 0;
 }
 .back-to-top:hover {
-  background: var(--color-terciario);
-  color: var(--color-blanco);
+  background: var(--color-primario);
 }
 .back-to-top.active {
   visibility: visible;
@@ -100,7 +96,7 @@ Scroll Bar
   z-index: 9997;
   transition: all 0.5s;
   padding: 0 15px;
-  background: var(--bg-header);
+  background: var(--bg-dark);
   overflow-y: auto;
 }
 #header .profile img {
@@ -109,6 +105,10 @@ Scroll Bar
   width: 170px;
   height: 170px;
   border: 8px solid #2c2f3f;
+}
+#header .profile img:hover {
+  border: 8px solid var(--color-primario);
+  cursor: pointer;
 }
 #header .profile .img-perfil {
   transition: all 0.5s;
@@ -130,11 +130,9 @@ Scroll Bar
   text-decoration: none;
 }
 #header .profile h1 a:hover {
-  color: var(--color-secundario);
+  color: var(--color-primario);
 }
-#header .dark-mode i {
-  font-size: 15px;
-}
+
 @media (max-width: 1199px) {
   #header {
       left: -300px;
@@ -194,7 +192,7 @@ Scroll Bar
   font-size: 24px;
   transition: all 0.4s;
   outline: none !important;
-  background-color: var(--color-primario);
+  background-color: var(--color-terciario);
   color: var(--color-blanco);
   width: 40px;
   height: 40px;
@@ -204,6 +202,9 @@ Scroll Bar
   line-height: 0;
   border-radius: 50px;
   cursor: pointer;
+}
+.mobile-nav-toggle:hover {
+  background-color: var(--color-primario);
 }
 .mobile-nav-active {
   overflow: hidden;
@@ -218,7 +219,7 @@ Scroll Bar
 #header .barra {
   padding: 0.75rem;
 }
-#header .barra a {
+#header .barra .icon a {
   font-size: 18px;
   display: inline-block;
   background: var(--color-icon);
@@ -231,10 +232,13 @@ Scroll Bar
   height: 36px;
   transition: 0.3s;
 }
-#header .barra a:hover {
-  background: var(--color-primario);
+#header .barra .icon a:hover {
+  background: var(--color-secundario);
   color: var(--color-blanco);
   text-decoration: none;
+}
+#header .barra .dark-mode i{
+  font-size: 15px;
 }
 #header .barra .logo {
   margin: auto;
@@ -246,6 +250,8 @@ Scroll Bar
 }
 #header .barra .logo:hover{
   transform: translateY(-3px);
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
+  cursor: pointer;
 }
 
 /*--------------------------------------------------------------
@@ -267,7 +273,7 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  color: var(--color-terciario);
+  color: var(--color-secundario);
   transition: all 0.5s;
 }
 .section-title h2:hover {
@@ -289,6 +295,7 @@ section {
   margin-bottom: 0;
 }
 .section-title i {
+  color: var(--color-blanco);
   font-size: 25px;
 }
 .section-title i:hover {
@@ -431,14 +438,21 @@ section {
   color: var(--color-primario);
   line-height: 0;
 }
+.acerca-de .content ul i:hover {
+  color: var(--color-terciario);
+  cursor: pointer;
+}
+.acerca-de .content p {
+  font-size: 20px;
+}
 .acerca-de .content p:last-child {
   margin-bottom: 0;
 }
 .acerca-de .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: var(--color-terciario);
-  color: var(--color-blanco);
+  background: var(--color-secundario);
+  color: var(--color-negro);
   line-height: 1;
   padding: 8px 0;
   border-radius: 50%;
@@ -449,7 +463,7 @@ section {
   margin-left: 5px;
 }
 .acerca-de .social-links a:hover {
-  background: var(--color-primario);
+  background: var(--color-terciario);
   color: var(--color-blanco);
   text-decoration: none;
 }
@@ -457,6 +471,7 @@ section {
   float: right;
 }
 .acerca-de .opciones i {
+  color: var(--color-blanco);
   font-size: 16px;
 }
 .acerca-de .opciones i:hover {
@@ -494,8 +509,9 @@ section {
 }
 .educacion .icon-box:hover{
   transform: translateY(-3px);
-  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
   cursor: pointer;
+  border-radius: 15px;
 }
 .educacion .icon {
   float: left;
@@ -524,7 +540,7 @@ section {
   font-size: 18px;
 }
 .educacion .title a {
-  color: var(--color-negro);
+  color: var(--color-blanco);
 }
 .educacion .title a:hover {
   color: var(--color-primario);
@@ -544,6 +560,7 @@ section {
 }
 .educacion .opciones i {
   font-size: 16px;
+  color: var(--color-blanco);
 }
 .educacion .opciones i:hover {
   color: var(--color-primario);
@@ -574,8 +591,9 @@ section {
 }
 .experiencia .icon-box:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
   cursor: pointer;
+  border-radius: 15px;
 }
 .experiencia .icon {
   float: left;
@@ -604,7 +622,7 @@ section {
   font-size: 18px;
 }
 .experiencia .title a {
-  color: var(--color-negro);
+  color: var(--color-blanco);
 }
 .experiencia .title a:hover {
   color: var(--color-primario);
@@ -624,6 +642,7 @@ section {
 }
 .experiencia .opciones i {
   font-size: 16px;
+  color: var(--color-blanco);
 }
 .experiencia .opciones i:hover {
   color: var(--color-primario);
@@ -660,7 +679,7 @@ section {
   display: block;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  color: var(--color-negro);
+  color: var(--color-blanco);
   font-size: 16px;
 }
 .habilidades .progress .skill:hover {
@@ -679,7 +698,7 @@ section {
   width: 1px;
   height: 10px;
   transition: all 8s ease .8s;
-  background-color: var(--color-primario);
+  background-color: var(--color-secundario);
 }
 .habilidades .icon-box {
   padding: 20px;
@@ -688,14 +707,16 @@ section {
 }
 .habilidades .icon-box:hover{
   transform: translateY(-3px);
-  box-shadow: 0 4px 17px var(--color-negro);
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
   cursor: pointer;
+  border-radius: 15px;
 }
 .habilidades .opciones{
   float: right;
 }
 .habilidades .opciones i {
   font-size: 16px;
+  color: var(--color-blanco);
 }
 .habilidades .opciones i:hover {
   color: var(--color-primario);
@@ -725,14 +746,21 @@ section {
 .proyectos .proyectos-wrap img {
   height: 250px;
   width: 100%;
+  border-radius: 15px;
 }
 .proyectos .proyectos-wrap {
-  transition: 0.3s;
+  transition: all 0.5s;
   position: relative;
   overflow: hidden;
   z-index: 1;
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+}
+.proyectos .proyectos-wrap:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
+  cursor: pointer;
+  border-radius: 15px;
 }
 .proyectos .proyectos-wrap::before {
   content: "";
@@ -792,6 +820,9 @@ section {
   font-size: 20px;
   color: var(--color-blanco);
   font-weight: 600;
+}
+.proyectos .proyectos-wrap .proyectos-info h4:hover {
+  color: var(--color-primario);
 }
 .proyectos .proyectos-wrap .proyectos-info p {
   color: var(--color-blanco);
@@ -963,4 +994,32 @@ section {
   margin: auto;
   background-color: var(--color-blanco);
   color: var(--color-negro);
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  padding: 15px;
+  color: #f4f6fd;
+  font-size: 14px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 9999;
+  background: var(--bg-dark);
+}
+#footer .credits {
+  padding-top: 5px;
+  text-align: center;
+  font-size: 13px;
+  color: #eaebf0;
+}
+@media (max-width: 1300px) {
+  #footer {
+    position: static;
+    width: auto;
+    padding-right: 20px 15px;
+  }
 }
