@@ -58,7 +58,7 @@
         
         <nav id="navbar" class="nav-menu navbar">
             <ul>
-                <li><a href="#inicio" class="nav-link scrollto active"><i class="fas fa-university"></i> <span>Inicio</span></a></li>
+                <li><a href="#persona" class="nav-link scrollto active"><i class="fas fa-university"></i> <span>Inicio</span></a></li>
                 <li><a href="#acerca-de" class="nav-link scrollto"><i class="fas fa-user"></i> <span>Acerca de mí</span></a></li>
                 <li><a href="#educacion" class="nav-link scrollto"><i class="fas fa-user-graduate"></i><span>Educación</span></a></li>
                 <li><a href="#experiencia" class="nav-link scrollto"><i class="fas fa-book"></i> <span>Experiencia</span></a></li>
@@ -70,8 +70,8 @@
     </div>
 </header>
 
-<section id="inicio" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url({{persona.imgPortada}})">
-    <div class="inicio-container mostrarArriba" data-aos="fade-in">
+<section id="persona" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url({{persona.imgPortada}})">
+    <div class="persona-container mostrarArriba" data-aos="fade-in">
         <div class="d-flex icon">
             <h1>{{persona.nombre}}</h1>
             <a (click)="dataForm()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#PersonaModal"><i class="fas fa-edit"></i></a>
@@ -95,24 +95,24 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-body">
                 <form [formGroup]="form">
                     <div>
-                        <label for="nombre" class="col-form-label text-light">Nombre y Apellido:</label>
-                        <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                        <label for="nombrePersona" class="col-form-label text-light">Nombre y Apellido:</label>
+                        <input type="text" class="form-control" id="nombrePersona" formControlName="nombre">
                     </div>
                     <div>
-                        <label for="imgPerfil" class="col-form-label text-light">Foto de perfil:</label>
-                        <input type="text" class="form-control" id="imgPerfil" formControlName="imgPerfil">
+                        <label for="imgPerfilPersona" class="col-form-label text-light">Foto de perfil:</label>
+                        <input type="text" class="form-control" id="imgPerfilPersona" formControlName="imgPerfil">
                     </div>
                     <div>
-                        <label for="imgPortada" class="col-form-label text-light">Foto de portada:</label>
-                        <input type="text" class="form-control" id="imgPortada" formControlName="imgPortada">
+                        <label for="imgPortadaPersona" class="col-form-label text-light">Foto de portada:</label>
+                        <input type="text" class="form-control" id="imgPortadaPersona" formControlName="imgPortada">
                     </div>
                     <div>
-                        <label for="cargo" class="col-form-label text-light">Cargo:</label>
-                        <input type="text" class="form-control" id="cargo" formControlName="cargo">
+                        <label for="cargoPersona" class="col-form-label text-light">Cargo:</label>
+                        <input type="text" class="form-control" id="cargoPersona" formControlName="cargo">
                     </div>
                     <div>
-                        <label for="tipoCargo" class="col-form-label text-light">Tipo de cargo (ej. frontend, backend, fullstack):</label>
-                        <input type="text" class="form-control" id="tipoCargo" formControlName="tipoCargo">
+                        <label for="tipoCargoPersona" class="col-form-label text-light">Tipo de cargo (ej. frontend, backend, fullstack):</label>
+                        <input type="text" class="form-control" id="tipoCargoPersona" formControlName="tipoCargo">
                     </div>
                     <div class="modal-footer mt-4"> 
                         <button (click)="newPersona()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>

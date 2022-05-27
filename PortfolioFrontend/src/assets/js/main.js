@@ -122,7 +122,7 @@
     });
 
       /**
-     * Efecto tipado en Inicio
+     * Efecto tipado en Persona
      */
     const typed = select('.typed')
     if (typed) {
@@ -183,6 +183,18 @@
     }
     //Cuando escuche el elemento scroll, se va a ejecutar la función mostrarScroll
     window.addEventListener('scroll',mostrarScroll);
+
+    // --- PAGE LOADER ---
+    window.onload = () => {
+      let loader = document.querySelector('.loader');
+      let container = document.querySelector('.cont');
+      setTimeout(function(){
+        container.style.visibility = 'hidden';
+        container.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        loader.style.opacity = '0';
+      }, 1200);
+    } 
 
 
   })()
