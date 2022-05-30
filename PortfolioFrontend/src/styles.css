@@ -244,7 +244,7 @@ Scroll Bar
 	}
 }
 #header .profile img {
-  margin: 20px auto;
+  margin: 15px auto;
   display: block;
   width: 170px;
   height: 170px;
@@ -290,7 +290,7 @@ Scroll Bar
 --------------------------------------------------------------*/
 /* Desktop Navigation */
 .nav-menu {
-  padding: 30px 0 0 0;
+  padding: 20px 0 0 0;
 }
 .nav-menu * {
   margin: 0;
@@ -1030,6 +1030,66 @@ section {
   .proyectos {
       padding: 50px 50px;
   }
+}
+
+/*--------------------------------------------------------------
+# Social
+--------------------------------------------------------------*/
+.social {
+  padding: 200px 50px;
+}
+.social .social-item {
+  margin-bottom: 30px;
+}
+.social .wrapper .button{
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  margin: 0 5px;
+  overflow: hidden;
+  background: var(--color-icon);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  color: var(--color-blanco);
+}
+.social .wrapper .button:hover{
+  width: 180px;
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
+}
+.social .wrapper .button .icon{
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50px;
+  box-sizing: border-box;
+  line-height: 60px;
+  transition: all 0.3s ease-out;
+}
+.social .wrapper .button .icon i{
+  font-size: 25px;
+  line-height: 60px;
+  transition: all 0.3s ease-out;
+}
+.social .wrapper .button span{
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 60px;
+  margin-left: 5px;
+  transition: all 0.3s ease-out;
+  color: var(--color-blanco);
+  text-transform: capitalize;
+}
+.social .opciones{
+  float: right;
+}
+.social .opciones i {
+  color: var(--color-blanco);
+  font-size: 16px;
+}
+.social .opciones i:hover {
+  color: var(--color-primario);
 }
 
 /*--------------------------------------------------------------
