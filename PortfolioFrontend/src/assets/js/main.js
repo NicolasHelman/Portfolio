@@ -130,10 +130,10 @@
       typed_strings = typed_strings.split(',')
       new Typed('.typed', {
         strings: typed_strings,
-        loop: true,
-        typeSpeed: 100,
-        backSpeed: 50,
-        backDelay: 2000
+        loop: true, // Repetir el array de strings
+        typeSpeed: 100, // Velocidad en mlisegundos para poner una letra
+        backSpeed: 50, // Velocidad en milisegundos para borrrar una letra
+        backDelay: 2000 // Tiempo de espera despues de que termina de escribir una palabra
       });
     }
 
