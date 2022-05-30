@@ -1,0 +1,119 @@
+<section id="social" class="social animacion">
+    <div class="container">
+
+        <div class="section-title">
+            <div class="d-flex">
+                <h2>Redes</h2>
+                <a (click)="nuevoSocial()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoSocialModal"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+
+        <div class="row social-content">
+            <div *ngFor="let social of listSocial" class="col-lg-4 col-md-6 social-item" data-aos="fade-up">
+                <div class="icon-box" data-aos="fade-up">
+                    <div class="d-flex opciones">
+                        <a (click)="editarSocial(social)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarSocialModal"><i class="fas fa-edit"></i></a>
+                        <a (click)="eliminarSocial(social.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+
+                    <div class="wrapper">
+                        <a class="button" href="{{social.urlSocial}}" target="_blank">
+                            <div>
+                                <div class="icon">
+                                    <i class="fab fa-{{social.nombre}}" attr.style="color: {{social.colorSocial}}"></i>
+                                </div>
+                                <span>{{social.nombre}}</span>
+                            </div>
+                        </a>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL NUEVO -->
+<div class="modal fade form-modal" id="NuevoSocialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Nueva Red Social</h5>
+                <button id="closeNuevoModalSocial" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formNuevo">
+                    <div>
+                        <label for="nombreSocialNuevo" class="col-form-label text-light">Nombre:</label>
+                        <select class="form-control" id="nombreSocialNuevo" formControlName="nombre">
+                            <option value="instagram">Instagram</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="github">GitHub</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="youtube">YouTube</option>
+                            <option value="discord">Discord</option>
+                            <option value="twitch">Twitch</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="urlSocialNuevo" class="col-form-label text-light">Url:</label>
+                        <input type="text" class="form-control" id="urlSocialNuevo" formControlName="urlSocial">
+                    </div>
+                    <div>
+                        <label for="colorSocialNuevo" class="col-form-label text-light">Color:</label>
+                        <input type="color" class="form-control" id="colorSocialNuevo" formControlName="colorSocial">
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="submitSocial()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade form-modal" id="EditarSocialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Editar Red Social</h5>
+                <button id="closeEditarModalSocial" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>               
+            <div class="modal-body">
+                <form [formGroup]="formEditar">
+                    <div>
+                        <label for="nombreSocialEditar" class="col-form-label text-light">Nombre:</label>
+                        <select class="form-control" id="nombreSocialEditar" formControlName="nombre">
+                            <option value="instagram">Instagram</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="github">Git Hub</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="youtube">YouTube</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="urlSocialEditar" class="col-form-label text-light">Url:</label>
+                        <input type="text" class="form-control" id="urlSocialEditar" formControlName="urlSocial">
+                    </div>
+                    <div>
+                        <label for="colorSocialEditar" class="col-form-label text-light">Color:</label>
+                        <input type="color" class="form-control" id="colorSocialEditar" formControlName="colorSocial">
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="submitSocial()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>
