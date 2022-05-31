@@ -16,24 +16,19 @@ public class AcercaDe {
     private String ciudad;
     private String telefono;
     private String mail;
-    private String github;
-    private String linkedIn;
     
     
     public AcercaDe() {
     	
     }
 
-	public AcercaDe(Long id, String descripcion, String fechaNacimiento, String ciudad, String telefono, String mail,
-			String github, String linkedIn) {
+	public AcercaDe(Long id, String descripcion, String fechaNacimiento, String ciudad, String telefono, String mail) {
 		this.id = id;
 		this.descripcion = descripcion;
 		this.fechaNacimiento = fechaNacimiento;
 		this.ciudad = ciudad;
 		this.telefono = telefono;
 		this.mail = mail;
-		this.github = github;
-		this.linkedIn = linkedIn;
 	}
 
 	public Long getId() {
@@ -82,22 +77,6 @@ public class AcercaDe {
 
 	public void setMail(String mail) {
 		this.mail = mail;
-	}
-
-	public String getGithub() {
-		return github;
-	}
-
-	public void setGithub(String github) {
-		this.github = github;
-	}
-
-	public String getLinkedIn() {
-		return linkedIn;
-	}
-
-	public void setLinkedIn(String linkedIn) {
-		this.linkedIn = linkedIn;
 	}
 
 }
