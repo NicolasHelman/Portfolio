@@ -52,8 +52,6 @@ public class AcercaDeController {
     	acercaDe.setCiudad(ad.getCiudad());
     	acercaDe.setTelefono(ad.getTelefono());
     	acercaDe.setMail(ad.getMail());
-    	acercaDe.setGithub(ad.getGithub());
-    	acercaDe.setLinkedIn(ad.getLinkedIn());
     	
         acercaDeService.save(acercaDe); 
         
