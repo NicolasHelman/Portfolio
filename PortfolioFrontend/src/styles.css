@@ -274,9 +274,11 @@ Scroll Bar
 #header .profile h1 a, #header .profile h1 a:hover {
   color: var(--color-blanco);
   text-decoration: none;
+  text-shadow: 2px 3px var(--color-negro);
 }
 #header .profile h1 a:hover {
   color: var(--color-primario);
+  text-shadow: 2px 3px var(--color-negro);
 }
 
 @media (max-width: 1199px) {
@@ -560,6 +562,9 @@ section {
   font-size: 26px;
   color: var(--color-terciario);
 }
+.acerca-de .descripcion {
+  margin-bottom: 50px;
+}
 .acerca-de .content ul {
   list-style: none;
   padding: 0;
@@ -573,6 +578,7 @@ section {
   margin-right: 10px;
   transition: all 0.5s;
   font-size: 16px;
+  color: var(--color-secundario);
 }
 .acerca-de .content ul strong:hover {
   transform: translateY(-3px);
@@ -595,24 +601,26 @@ section {
 .acerca-de .content p:last-child {
   margin-bottom: 0;
 }
-.acerca-de .social-links a {
-  font-size: 18px;
+.acerca-de .cv {
   display: inline-block;
-  background: var(--color-secundario);
-  color: var(--color-negro);
-  line-height: 1;
-  padding: 8px 0;
-  border-radius: 50%;
-  text-align: center;
-  width: 36px;
-  height: 36px;
-  transition: 0.3s;
-  margin-left: 5px;
+  background-color: var(--color-secundario);
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 30px;
+  transition: all 0.5s;
 }
-.acerca-de .social-links a:hover {
-  background: var(--color-terciario);
-  color: var(--color-blanco);
-  text-decoration: none;
+.acerca-de .cv:hover {
+  background-color: var(--color-primario);
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
+  transform: translateY(-3px);
+}
+.acerca-de .cv a{
+  display: inline-flex;
+  color: var(--color-negro);
+  font-weight: 600;
+}
+.acerca-de .cv a i {
+  font-size: 18px;
 }
 .acerca-de .opciones{
   float: right;
@@ -1045,7 +1053,6 @@ section {
   display: inline-block;
   height: 60px;
   width: 60px;
-  margin: 0 5px;
   overflow: hidden;
   background: var(--color-icon);
   border-radius: 50px;
@@ -1076,7 +1083,7 @@ section {
   font-size: 20px;
   font-weight: 500;
   line-height: 60px;
-  margin-left: 5px;
+  margin: auto;
   transition: all 0.3s ease-out;
   color: var(--color-blanco);
   text-transform: capitalize;

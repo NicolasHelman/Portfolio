@@ -16,7 +16,7 @@
                     <a (click)="eliminarAcercaDe(acercaDe.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
                 </div>
 
-                <div class="mb-4">
+                <div class="descripcion">
                     <p>{{acercaDe.descripcion}}</p>
                 </div>
 
@@ -24,18 +24,20 @@
                     <div class="col-lg-6">
                         <ul>
                             <li><i class="fas fa-calendar-alt"></i> <strong class="ms-2">Nacimiento:</strong> <span>{{acercaDe.fechaNacimiento | date: 'dd/MM/yyyy':'UTC'}}</span></li>
-                            <li><i class="fas fa-map-marker"></i> <strong class="ms-2">Ciudad:</strong> <span>{{acercaDe.ciudad}}</span></li>
+                            <li><i class="fas fa-map-marker-alt"></i> <strong class="ms-2">Ciudad:</strong> <span>{{acercaDe.ciudad}}</span></li>
                             <li><i class="fas fa-phone"></i> <strong class="ms-1">Teléfono:</strong> <span>{{acercaDe.telefono}}</span></li>
                             <li><i class="fas fa-envelope"></i> <strong class="ms-1">Email:</strong> <span>{{acercaDe.mail}}</span></li>
                         </ul>
                     </div>
                 </div>
-             
-                <div class="social-links mt-3">
-                    <a href="{{acercaDe.linkedIn}}" target="_blank" class=""><i class="fab fa-linkedin"></i></a>
-                    <a href="{{acercaDe.github}}" target="_blank" class=""><i class="fab fa-github"></i></a>
+                <!--
+                <div class="cv">
+                    <a download="" href="">
+                        Descargar CV
+                        <i class="fas fa-download ms-1"></i>
+                    </a>
                 </div>
-
+                -->
             </div>
         </div>    
 
@@ -72,14 +74,6 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div>
                     <label for="mailAcercaDeNuevo" class="col-form-label text-light">Email:</label>
                     <input type="email" class="form-control" id="mailAcercaDeNuevo" formControlName="mail">
-                </div>
-                <div>
-                    <label for="githubAcercaDeNuevo" class="col-form-label text-light">GitHub (Url):</label>
-                    <input type="text" class="form-control" id="githubAcercaDeNuevo" formControlName="github">
-                </div>
-                <div>
-                    <label for="linkedInAcercaDeNuevo" class="col-form-label text-light">LinkedIn (Url):</label>
-                    <input type="text" class="form-control" id="linkedInAcercaDeNuevo" formControlName="linkedIn">
                 </div>
                 <div class="modal-footer mt-4">
                     <button (click)="submitAcercaDe()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
@@ -120,14 +114,6 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div>
                     <label for="mailAcercaDeEditar" class="col-form-label text-light">Email:</label>
                     <input type="email" class="form-control" id="mailAcercaDeEditar" formControlName="mail">
-                </div>
-                <div>
-                    <label for="githubAcercaDeEditar" class="col-form-label text-light">GitHub (Url):</label>
-                    <input type="text" class="form-control" id="githubAcercaDeEditar" formControlName="github">
-                </div>
-                <div>
-                    <label for="linkedInAcercaDeEditar" class="col-form-label text-light">LinkedIn (Url):</label>
-                    <input type="text" class="form-control" id="linkedInAcercaDeEditar" formControlName="linkedIn">
                 </div>
                 <div class="modal-footer mt-4">
                     <button (click)="submitAcercaDe()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>
