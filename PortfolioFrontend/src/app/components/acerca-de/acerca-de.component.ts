@@ -27,18 +27,14 @@ export class AcercaDeComponent implements OnInit {
       fechaNacimiento: ['',[Validators.required]],
       ciudad: ['',[Validators.required]],
       telefono: ['',[Validators.required,Validators.minLength(10)]],
-      mail: ['',[Validators.required]],
-      github: ['',[Validators.required]],
-      linkedIn: ['',[Validators.required]]
+      mail: ['',[Validators.required]]
     });
     this.formEditar = this.formBuilder.group({
       descripcion: ['',[Validators.required]],
       fechaNacimiento: ['',[Validators.required]],
       ciudad: ['',[Validators.required]],
       telefono: ['',[Validators.required,Validators.minLength(10)]],
-      mail: ['',[Validators.required]],
-      github: ['',[Validators.required]],
-      linkedIn: ['',[Validators.required]]
+      mail: ['',[Validators.required]]
     });
   }
 
@@ -63,9 +59,7 @@ export class AcercaDeComponent implements OnInit {
         fechaNacimiento: this.formNuevo.get('fechaNacimiento')?.value,
         ciudad: this.formNuevo.get('ciudad')?.value,
         telefono: this.formNuevo.get('telefono')?.value,
-        mail: this.formNuevo.get('mail')?.value,
-        github: this.formNuevo.get('github')?.value,
-        linkedIn: this.formNuevo.get('linkedIn')?.value
+        mail: this.formNuevo.get('mail')?.value
       }
     
       this.acercaDeService.save(acercaDeNuevo).subscribe(data=>{
@@ -84,9 +78,7 @@ export class AcercaDeComponent implements OnInit {
         fechaNacimiento: this.formEditar.get('fechaNacimiento')?.value,
         ciudad: this.formEditar.get('ciudad')?.value,
         telefono: this.formEditar.get('telefono')?.value,
-        mail: this.formEditar.get('mail')?.value,
-        github: this.formEditar.get('github')?.value,
-        linkedIn: this.formEditar.get('linkedIn')?.value
+        mail: this.formEditar.get('mail')?.value
       }
 
       acercaDeEditar.id = this.id;
@@ -114,9 +106,7 @@ export class AcercaDeComponent implements OnInit {
       fechaNacimiento: acercaDe.fechaNacimiento,
       ciudad: acercaDe.ciudad,
       telefono: acercaDe.telefono,
-      mail: acercaDe.mail,
-      github: acercaDe.github,
-      linkedIn: acercaDe.linkedIn
+      mail: acercaDe.mail
     })
 
   }
