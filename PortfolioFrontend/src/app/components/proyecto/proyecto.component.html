@@ -122,8 +122,8 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         </div>
                     </div>
                     <div>
-                        <label for="githubProyectoNuevo" class="col-form-label text-light">GitHub del proyecto:</label>
-                        <input type="text" class="form-control" id="githubProyectoNuevo" formControlName="githubProyecto">
+                        <label for="githubProyectoEditar" class="col-form-label text-light">GitHub del proyecto:</label>
+                        <input type="text" class="form-control" id="githubProyectoEditar" formControlName="githubProyecto">
                         <div *ngIf="formEditar.get('githubProyecto')?.invalid && (formEditar.get('githubProyecto')?.dirty || formEditar.get('githubProyecto')?.touched)">
                             <small class="text-danger fw-bolder" *ngIf="formEditar.get('githubProyecto')?.hasError('required')">*Ingrese el github del proyecto</small>
                         </div>
