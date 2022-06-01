@@ -11,6 +11,7 @@
         <div class="row habilidades-content">
             <div *ngFor="let habilidad of listHabilidad" class="col-lg-6 col-md-6" data-aos="fade-up">
                 <div class="icon-box" data-aos="fade-up">
+                    
                     <div class="d-flex opciones">
                         <a (click)="editarHabilidad(habilidad)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarHabilidadModal"><i class="fas fa-edit"></i></a>
                         <a (click)="eliminarHabilidad(habilidad.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
@@ -44,10 +45,18 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div>
                         <label for="tipoHabilidadNuevo" class="col-form-label text-light">Tipo de habilidad:</label>
                         <input type="text" class="form-control" id="tipoHabilidadNuevo" formControlName="tipo">
+                        <div *ngIf="formNuevo.get('tipo')?.invalid && (formNuevo.get('tipo')?.dirty || formNuevo.get('tipo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('tipo')?.hasError('required')">*Ingrese el tipo de habilidad</small>
+                        </div>
                     </div>
                     <div>
                         <label for="porcentajeHabilidadNuevo" class="col-form-label text-light">Porcentaje de aprendizaje:</label>
-                        <input type="number" max="100" min="1" class="form-control" id="porcentajeHabilidadNuevo" formControlName="porcentaje">
+                        <input type="number" min="1" max="100" class="form-control" id="porcentajeHabilidadNuevo" formControlName="porcentaje">
+                        <div *ngIf="formNuevo.get('porcentaje')?.invalid && (formNuevo.get('porcentaje')?.dirty || formNuevo.get('porcentaje')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('porcentaje')?.hasError('required')">*Ingrese el porcentaje de aprendizaje</small>
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('porcentaje')?.hasError('min')">*El porcentaje debe ser 1 o más</small>
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('porcentaje')?.hasError('max')">*El porcentaje debe ser 100 o menos</small>
+                        </div>
                     </div>
                     <div class="modal-footer mt-4">
                         <button (click)="submitHabilidad()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
@@ -74,10 +83,18 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div>
                         <label for="tipoHabilidadEditar" class="col-form-label text-light">Tipo de habilidad:</label>
                         <input type="text" class="form-control" id="tipoHabilidadEditar" formControlName="tipo">
+                        <div *ngIf="formEditar.get('tipo')?.invalid && (formEditar.get('tipo')?.dirty || formEditar.get('tipo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('tipo')?.hasError('required')">*Ingrese el tipo de habilidad</small>
+                        </div>
                     </div>
                     <div>
                         <label for="porcentajeHabilidadEditar" class="col-form-label text-light">Porcentaje de aprendizaje:</label>
-                        <input type="number" max="100" min="1" class="form-control" id="porcentajeHabilidadEditar" formControlName="porcentaje">
+                        <input type="number" min="1" max="100" class="form-control" id="porcentajeHabilidadEditar" formControlName="porcentaje">
+                        <div *ngIf="formEditar.get('porcentaje')?.invalid && (formEditar.get('porcentaje')?.dirty || formEditar.get('porcentaje')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('porcentaje')?.hasError('required')">*Ingrese el porcentaje de aprendizaje</small>
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('porcentaje')?.hasError('min')">*El porcentaje debe ser 1 o más</small>
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('porcentaje')?.hasError('max')">*El porcentaje debe ser 100 o menos</small>
+                        </div>
                     </div>
                     <div class="modal-footer mt-4">
                         <button (click)="submitHabilidad()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>

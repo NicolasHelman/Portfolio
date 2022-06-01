@@ -23,11 +23,11 @@ export class HabilidadComponent implements OnInit {
   ) {
     this.formNuevo =  this.formBuilder.group({
       tipo: ["",[Validators.required]],
-      porcentaje: ["", [Validators.required]]
+      porcentaje: ["", [Validators.required,Validators.min(1),Validators.max(100)]]
     });
     this.formEditar =  this.formBuilder.group({
       tipo: ["",[Validators.required]],
-      porcentaje: ["", [Validators.required]]
+      porcentaje: ["", [Validators.required,Validators.min(1),Validators.max(100)]]
     });
   }
 

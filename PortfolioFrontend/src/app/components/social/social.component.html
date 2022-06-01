@@ -11,6 +11,7 @@
         <div class="row social-content">
             <div *ngFor="let social of listSocial" class="col-lg-4 col-md-6 social-item" data-aos="fade-up">
                 <div class="icon-box" data-aos="fade-up">
+
                     <div class="d-flex opciones">
                         <a (click)="editarSocial(social)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarSocialModal"><i class="fas fa-edit"></i></a>
                         <a (click)="eliminarSocial(social.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
@@ -58,14 +59,23 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <option value="discord">Discord</option>
                             <option value="twitch">Twitch</option>
                         </select>
+                        <div *ngIf="formNuevo.get('nombre')?.invalid && (formNuevo.get('nombre')?.dirty || formNuevo.get('nombre')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('nombre')?.hasError('required')">*Ingrese el nombre de la red</small>
+                        </div>
                     </div>
                     <div>
                         <label for="urlSocialNuevo" class="col-form-label text-light">Url:</label>
                         <input type="text" class="form-control" id="urlSocialNuevo" formControlName="urlSocial">
+                        <div *ngIf="formNuevo.get('urlSocial')?.invalid && (formNuevo.get('urlSocial')?.dirty || formNuevo.get('urlSocial')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('urlSocial')?.hasError('required')">*Ingrese la url de la red</small>
+                        </div>
                     </div>
                     <div>
                         <label for="colorSocialNuevo" class="col-form-label text-light">Color:</label>
                         <input type="color" class="form-control" id="colorSocialNuevo" formControlName="colorSocial">
+                        <div *ngIf="formNuevo.get('colorSocial')?.invalid && (formNuevo.get('colorSocial')?.dirty || formNuevo.get('colorSocial')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('colorSocial')?.hasError('required')">*Ingrese el color de la red</small>
+                        </div>
                     </div>
                     <div class="modal-footer mt-4">
                         <button (click)="submitSocial()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
@@ -99,14 +109,23 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <option value="linkedin">LinkedIn</option>
                             <option value="youtube">YouTube</option>
                         </select>
+                        <div *ngIf="formEditar.get('nombre')?.invalid && (formEditar.get('nombre')?.dirty || formEditar.get('nombre')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('nombre')?.hasError('required')">*Ingrese el nombre de la red</small>
+                        </div>
                     </div>
                     <div>
                         <label for="urlSocialEditar" class="col-form-label text-light">Url:</label>
                         <input type="text" class="form-control" id="urlSocialEditar" formControlName="urlSocial">
+                        <div *ngIf="formEditar.get('urlSocial')?.invalid && (formEditar.get('urlSocial')?.dirty || formEditar.get('urlSocial')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('urlSocial')?.hasError('required')">*Ingrese la url de la red</small>
+                        </div>
                     </div>
                     <div>
                         <label for="colorSocialEditar" class="col-form-label text-light">Color:</label>
                         <input type="color" class="form-control" id="colorSocialEditar" formControlName="colorSocial">
+                        <div *ngIf="formEditar.get('colorSocial')?.invalid && (formEditar.get('colorSocial')?.dirty || formEditar.get('colorSocial')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('colorSocial')?.hasError('required')">*Ingrese el color de la red</small>
+                        </div>
                     </div>
                     <div class="modal-footer mt-4">
                         <button (click)="submitSocial()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>

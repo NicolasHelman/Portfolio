@@ -4,11 +4,11 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Acerca de mí</h2>
-                <a *ngIf="listAcercaDe.length == 0" (click)="nuevoAcercaDe()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoAcercaDeModal"><i class="fas fa-plus-square"></i></a>
+                <a *ngIf="listAcercaDe?.length == 0" (click)="nuevoAcercaDe()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoAcercaDeModal"><i class="fas fa-plus-square"></i></a>
             </div>               
         </div>
 
-        <div *ngIf="listAcercaDe.length == 1" class="row">
+        <div *ngIf="listAcercaDe?.length == 1" class="row">
             <div *ngFor="let acercaDe of listAcercaDe" class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
 
                 <div class="d-flex opciones">
@@ -58,22 +58,39 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div>
                     <label for="descripcionAcercaDeNuevo" class="col-form-label text-light">Descripción:</label>
                     <input type="text" class="form-control" id="descripcionAcercaDeNuevo" formControlName="descripcion">
+                    <div *ngIf="formNuevo.get('descripcion')?.invalid && (formNuevo.get('descripcion')?.dirty || formNuevo.get('descripcion')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formNuevo.get('descripcion')?.hasError('required')">*Ingrese la descripción</small>
+                    </div>
                 </div>
                 <div>
                     <label for="fechaNacimientoAcercaDeNuevo" class="col-form-label text-light">Fecha de nacimiento:</label>
                     <input type="date" class="form-control" id="fechaNacimientoAcercaDeNuevo" formControlName="fechaNacimiento">
+                    <div *ngIf="formNuevo.get('fechaNacimiento')?.invalid && (formNuevo.get('fechaNacimiento')?.dirty || formNuevo.get('fechaNacimiento')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formNuevo.get('fechaNacimiento')?.hasError('required')">*Ingrese la fecha de nacimiento</small>
+                    </div>
                 </div>
                 <div>
                     <label for="ciudadAcercaDeNuevo" class="col-form-label text-light">Ciudad:</label>
                     <input type="text" class="form-control" id="ciudadAcercaDeNuevo" formControlName="ciudad">
+                    <div *ngIf="formNuevo.get('ciudad')?.invalid && (formNuevo.get('ciudad')?.dirty || formNuevo.get('ciudad')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formNuevo.get('ciudad')?.hasError('required')">*Ingrese la ciudad</small>
+                    </div>
                 </div>
                 <div>
                     <label for="telefonoAcercaDeNuevo" class="col-form-label text-light">Teléfono:</label>
-                    <input type="number" class="form-control" id="telefonoAcercaDeNuevo" formControlName="telefono">
+                    <input type="number" min="1000000000" class="form-control" id="telefonoAcercaDeNuevo" formControlName="telefono">
+                    <div *ngIf="formNuevo.get('telefono')?.invalid && (formNuevo.get('telefono')?.dirty || formNuevo.get('telefono')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formNuevo.get('telefono')?.hasError('required')">*Ingrese el número de teléfono</small>
+                        <small class="text-danger fw-bolder" *ngIf="formNuevo.get('telefono')?.hasError('min')">*Debe tener 10 números o más</small>
+                    </div>
                 </div>
                 <div>
                     <label for="mailAcercaDeNuevo" class="col-form-label text-light">Email:</label>
                     <input type="email" class="form-control" id="mailAcercaDeNuevo" formControlName="mail">
+                    <div *ngIf="formNuevo.get('mail')?.invalid && (formNuevo.get('mail')?.dirty || formNuevo.get('mail')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formNuevo.get('mail')?.hasError('required')">*Ingrese el email</small>
+                        <small class="text-danger fw-bolder" *ngIf="formNuevo.get('mail')?.hasError('email')">*La dirección de email no es correcta</small>
+                    </div>
                 </div>
                 <div class="modal-footer mt-4">
                     <button (click)="submitAcercaDe()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
@@ -98,22 +115,39 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div>
                     <label for="descripcionAcercaDeEditar" class="col-form-label text-light">Descripción:</label>
                     <input type="text" class="form-control" id="descripcionAcercaDeEditar" formControlName="descripcion">
+                    <div *ngIf="formEditar.get('descripcion')?.invalid && (formEditar.get('descripcion')?.dirty || formEditar.get('descripcion')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formEditar.get('descripcion')?.hasError('required')">*Ingrese la descripción</small>
+                    </div>
                 </div>
                 <div>
                     <label for="fechaNacimientoAcercaDeEditar" class="col-form-label text-light">Fecha de nacimiento:</label>
                     <input type="date" class="form-control" id="fechaNacimientoAcercaDeEditar" formControlName="fechaNacimiento">
+                    <div *ngIf="formEditar.get('fechaNacimiento')?.invalid && (formEditar.get('fechaNacimiento')?.dirty || formEditar.get('fechaNacimiento')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formEditar.get('fechaNacimiento')?.hasError('required')">*Ingrese la fecha de nacimiento</small>
+                    </div>
                 </div>
                 <div>
                     <label for="ciudadAcercaDeEditar" class="col-form-label text-light">Ciudad:</label>
                     <input type="text" class="form-control" id="ciudadAcercaDeEditar" formControlName="ciudad">
+                    <div *ngIf="formEditar.get('ciudad')?.invalid && (formEditar.get('ciudad')?.dirty || formEditar.get('ciudad')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formEditar.get('ciudad')?.hasError('required')">*Ingrese la ciudad</small>
+                    </div>
                 </div>
                 <div>
                     <label for="telefonoAcercaDeEditar" class="col-form-label text-light">Teléfono:</label>
-                    <input type="number" class="form-control" id="telefonoAcercaDeEditar" formControlName="telefono">
+                    <input type="number" min="1000000000" class="form-control" id="telefonoAcercaDeEditar" formControlName="telefono">
+                    <div *ngIf="formEditar.get('telefono')?.invalid && (formEditar.get('telefono')?.dirty || formEditar.get('telefono')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formEditar.get('telefono')?.hasError('required')">*Ingrese el número de teléfono</small>
+                        <small class="text-danger fw-bolder" *ngIf="formEditar.get('telefono')?.hasError('min')">*Debe tener 10 números o más</small>
+                    </div>
                 </div>
                 <div>
                     <label for="mailAcercaDeEditar" class="col-form-label text-light">Email:</label>
                     <input type="email" class="form-control" id="mailAcercaDeEditar" formControlName="mail">
+                    <div *ngIf="formEditar.get('mail')?.invalid && (formEditar.get('mail')?.dirty || formEditar.get('mail')?.touched)">
+                        <small class="text-danger fw-bolder" *ngIf="formEditar.get('mail')?.hasError('required')">*Ingrese el email</small>
+                        <small class="text-danger fw-bolder" *ngIf="formEditar.get('mail')?.hasError('email')">*La dirección de email no es correcta</small>
+                    </div>
                 </div>
                 <div class="modal-footer mt-4">
                     <button (click)="submitAcercaDe()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>

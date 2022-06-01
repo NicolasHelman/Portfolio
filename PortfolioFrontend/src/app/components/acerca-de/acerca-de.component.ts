@@ -26,15 +26,15 @@ export class AcercaDeComponent implements OnInit {
       descripcion: ['',[Validators.required]],
       fechaNacimiento: ['',[Validators.required]],
       ciudad: ['',[Validators.required]],
-      telefono: ['',[Validators.required,Validators.minLength(10)]],
-      mail: ['',[Validators.required]]
+      telefono: ['',[Validators.required,Validators.min(1000000000)]],
+      mail: ['',[Validators.required,Validators.email]]
     });
     this.formEditar = this.formBuilder.group({
       descripcion: ['',[Validators.required]],
       fechaNacimiento: ['',[Validators.required]],
       ciudad: ['',[Validators.required]],
-      telefono: ['',[Validators.required,Validators.minLength(10)]],
-      mail: ['',[Validators.required]]
+      telefono: ['',[Validators.required,Validators.min(1000000000)]],
+      mail: ['',[Validators.required,Validators.email]]
     });
   }
 

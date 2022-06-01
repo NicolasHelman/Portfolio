@@ -41,22 +41,37 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div>
                         <label for="empresaExperienciaNuevo" class="col-form-label text-light">Empresa:</label>
                         <input type="text" class="form-control" id="empresaExperienciaNuevo" formControlName="empresa">
+                        <div *ngIf="formNuevo.get('empresa')?.invalid && (formNuevo.get('empresa')?.dirty || formNuevo.get('empresa')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('empresa')?.hasError('required')">*Ingrese el nombre de la empresa</small>
+                        </div>
                     </div>
                     <div>
                         <label for="cargoEmpresaNuevo" class="col-form-label text-light">Cargo:</label>
                         <input type="text" class="form-control" id="cargoEmpresaNuevo" formControlName="cargo">
+                        <div *ngIf="formNuevo.get('cargo')?.invalid && (formNuevo.get('cargo')?.dirty || formNuevo.get('cargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('cargo')?.hasError('required')">*Ingrese el cargo en la empresa</small>
+                        </div>
                     </div>
                     <div>
                         <label for="fechaInicioExperienciaNuevo" class="col-form-label text-light">Fecha inicio:</label>
                         <input type="date" class="form-control" id="fechaInicioExperienciaNuevo" formControlName="fechaInicio">
+                        <div *ngIf="formNuevo.get('fechaInicio')?.invalid && (formNuevo.get('fechaInicio')?.dirty || formNuevo.get('fechaInicio')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('fechaInicio')?.hasError('required')">*Ingrese la fecha de inicio</small>
+                        </div>
                     </div>
                     <div>
                         <label for="fechaFinExperienciaNuevo" class="col-form-label text-light">Fecha fin:</label>
                         <input type="date" class="form-control" id="fechaFinExperienciaNuevo" formControlName="fechaFin">
+                        <div *ngIf="formNuevo.get('fechaFin')?.invalid && (formNuevo.get('fechaFin')?.dirty || formNuevo.get('fechaFin')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('fechaFin')?.hasError('required')">*Ingrese la fecha de fin</small>
+                        </div>
                     </div>
                     <div>
                         <label for="imgEmpresaExperienciaNuevo" class="col-form-label text-light">Foto de Empresa:</label>
                         <input type="text" class="form-control" id="imgEmpresaExperienciaNuevo" formControlName="imgEmpresa">
+                        <div *ngIf="formNuevo.get('imgEmpresa')?.invalid && (formNuevo.get('imgEmpresa')?.dirty || formNuevo.get('imgEmpresa')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('imgEmpresa')?.hasError('required')">*Ingrese una foto de la empresa</small>
+                        </div>
                     </div>
                     <div class="modal-footer mt-4">
                         <button (click)="submitExperiencia()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
@@ -83,22 +98,37 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div>
                         <label for="empresaExperienciaEditar" class="col-form-label text-light">Empresa:</label>
                         <input type="text" class="form-control" id="empresaExperienciaEditar" formControlName="empresa">
+                        <div *ngIf="formEditar.get('empresa')?.invalid && (formEditar.get('empresa')?.dirty || formEditar.get('empresa')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('empresa')?.hasError('required')">*Ingrese el nombre de la empresa</small>
+                        </div>
                     </div>
                     <div>
                         <label for="cargoEmpresaEditar" class="col-form-label text-light">Cargo:</label>
                         <input type="text" class="form-control" id="cargoEmpresaEditar" formControlName="cargo">
+                        <div *ngIf="formEditar.get('cargo')?.invalid && (formEditar.get('cargo')?.dirty || formEditar.get('cargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('cargo')?.hasError('required')">*Ingrese el cargo en la empresa</small>
+                        </div>
                     </div>
                     <div>
                         <label for="fechaInicioExperienciaEditar" class="col-form-label text-light">Fecha inicio:</label>
                         <input type="date" class="form-control" id="fechaInicioExperienciaEditar" formControlName="fechaInicio">
+                        <div *ngIf="formEditar.get('fechaInicio')?.invalid && (formEditar.get('fechaInicio')?.dirty || formEditar.get('fechaInicio')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('fechaInicio')?.hasError('required')">*Ingrese la fecha de inicio</small>
+                        </div>
                     </div>
                     <div>
                         <label for="fechaFinExperienciaEditar" class="col-form-label text-light">Fecha fin:</label>
                         <input type="date" class="form-control" id="fechaFinExperienciaEditar" formControlName="fechaFin">
+                        <div *ngIf="formEditar.get('fechaFin')?.invalid && (formEditar.get('fechaFin')?.dirty || formEditar.get('fechaFin')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('fechaFin')?.hasError('required')">*Ingrese la fecha de fin</small>
+                        </div>
                     </div>
                     <div>
                         <label for="imgEmpresaExperienciaEditar" class="col-form-label text-light">Foto de Empresa:</label>
                         <input type="text" class="form-control" id="imgEmpresaExperienciaEditar" formControlName="imgEmpresa">
+                        <div *ngIf="formEditar.get('imgEmpresa')?.invalid && (formEditar.get('imgEmpresa')?.dirty || formEditar.get('imgEmpresa')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('imgEmpresa')?.hasError('required')">*Ingrese una foto de la empresa</small>
+                        </div>
                     </div>
                     <div class="modal-footer mt-4">
                         <button (click)="submitExperiencia()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>

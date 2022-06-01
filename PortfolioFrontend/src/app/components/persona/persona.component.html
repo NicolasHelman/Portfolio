@@ -75,7 +75,7 @@
     <div class="persona-container mostrarArriba" data-aos="fade-in">
         <div class="d-flex icon">
             <h1>{{persona.nombre}}</h1>
-            <a (click)="dataForm()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#PersonaModal"><i class="fas fa-edit"></i></a>
+            <a (click)="editarPersona()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#PersonaModal"><i class="fas fa-edit"></i></a>
         </div>
         
         <p>{{persona.cargo}} <span class="typed" attr.data-typed-items="{{persona.tipoCargo}}"></span></p>
@@ -94,29 +94,44 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <button id="closeModalPersona" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>               
             <div class="modal-body">
-                <form [formGroup]="form">
+                <form [formGroup]="formPersona">
                     <div>
                         <label for="nombrePersona" class="col-form-label text-light">Nombre y Apellido:</label>
                         <input type="text" class="form-control" id="nombrePersona" formControlName="nombre">
+                        <div *ngIf="formPersona.get('nombre')?.invalid && (formPersona.get('nombre')?.dirty || formPersona.get('nombre')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('nombre')?.hasError('required')">*Ingrese el nombre y apellido</small>
+                        </div>
                     </div>
                     <div>
                         <label for="imgPerfilPersona" class="col-form-label text-light">Foto de perfil:</label>
                         <input type="text" class="form-control" id="imgPerfilPersona" formControlName="imgPerfil">
+                        <div *ngIf="formPersona.get('imgPerfil')?.invalid && (formPersona.get('imgPerfil')?.dirty || formPersona.get('imgPerfil')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('imgPerfil')?.hasError('required')">*Ingrese la foto de perfil</small>
+                        </div>
                     </div>
                     <div>
                         <label for="imgPortadaPersona" class="col-form-label text-light">Foto de portada:</label>
                         <input type="text" class="form-control" id="imgPortadaPersona" formControlName="imgPortada">
+                        <div *ngIf="formPersona.get('imgPortada')?.invalid && (formPersona.get('imgPortada')?.dirty || formPersona.get('imgPortada')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('imgPortada')?.hasError('required')">*Ingrese la foto de portada</small>
+                        </div>
                     </div>
                     <div>
                         <label for="cargoPersona" class="col-form-label text-light">Cargo:</label>
                         <input type="text" class="form-control" id="cargoPersona" formControlName="cargo">
+                        <div *ngIf="formPersona.get('cargo')?.invalid && (formPersona.get('cargo')?.dirty || formPersona.get('cargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('cargo')?.hasError('required')">*Ingrese el cargo</small>
+                        </div>
                     </div>
                     <div>
                         <label for="tipoCargoPersona" class="col-form-label text-light">Tipo de cargo (ej. frontend, backend, fullstack):</label>
                         <input type="text" class="form-control" id="tipoCargoPersona" formControlName="tipoCargo">
+                        <div *ngIf="formPersona.get('tipoCargo')?.invalid && (formPersona.get('tipoCargo')?.dirty || formPersona.get('tipoCargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('tipoCargo')?.hasError('required')">*Ingrese el tipo de cargo</small>
+                        </div>
                     </div>
                     <div class="modal-footer mt-4"> 
-                        <button (click)="newPersona()" [disabled]="this.form.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                        <button (click)="submitPersona()" [disabled]="this.formPersona.invalid" type="submit" class="btn btn-dark">Guardar</button>
                     </div>
                 </form>
             </div>

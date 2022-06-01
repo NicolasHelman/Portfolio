@@ -12,14 +12,14 @@ import { PersonaService } from 'src/app/services/persona.service';
 export class PersonaComponent implements OnInit {
 
   persona!: Persona;
-  form: FormGroup;
+  formPersona: FormGroup;
 
   constructor(
     private personaService: PersonaService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) { 
-    this.form = this.formBuilder.group({
+    this.formPersona = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       imgPerfil: ['', [Validators.required]],
       imgPortada:['', [Validators.required]],
@@ -40,14 +40,14 @@ export class PersonaComponent implements OnInit {
     )
   };
 
-  newPersona() {
-    if(this.form.valid){
+  submitPersona() {
+    if(this.formPersona.valid){
     
-      let nombre = this.form.controls["nombre"].value;
-      let imgPerfil = this.form.controls["imgPerfil"].value;
-      let imgPortada = this.form.controls["imgPortada"].value;
-      let cargo = this.form.controls["cargo"].value;
-      let tipoCargo = this.form.controls["tipoCargo"].value;
+      let nombre = this.formPersona.controls["nombre"].value;
+      let imgPerfil = this.formPersona.controls["imgPerfil"].value;
+      let imgPortada = this.formPersona.controls["imgPortada"].value;
+      let cargo = this.formPersona.controls["cargo"].value;
+      let tipoCargo = this.formPersona.controls["tipoCargo"].value;
     
       let personaEditar = new Persona(this.persona.id, nombre, imgPerfil, imgPortada, cargo, tipoCargo);
     
@@ -62,16 +62,16 @@ export class PersonaComponent implements OnInit {
       })
 
     } else{
-      this.form.markAllAsTouched();
+      this.formPersona.markAllAsTouched();
     }
   }
 
-  dataForm(){
-    this.form.controls["nombre"].setValue(this.persona.nombre);
-    this.form.controls["imgPerfil"].setValue(this.persona.imgPerfil);
-    this.form.controls["imgPortada"].setValue(this.persona.imgPortada);
-    this.form.controls["cargo"].setValue(this.persona.cargo);
-    this.form.controls["tipoCargo"].setValue(this.persona.tipoCargo);
+  editarPersona(){
+    this.formPersona.controls["nombre"].setValue(this.persona.nombre);
+    this.formPersona.controls["imgPerfil"].setValue(this.persona.imgPerfil);
+    this.formPersona.controls["imgPortada"].setValue(this.persona.imgPortada);
+    this.formPersona.controls["cargo"].setValue(this.persona.cargo);
+    this.formPersona.controls["tipoCargo"].setValue(this.persona.tipoCargo);
   }
 
   closeForm(): void{
