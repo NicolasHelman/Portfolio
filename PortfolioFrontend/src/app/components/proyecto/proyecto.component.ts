@@ -25,13 +25,15 @@ export class ProyectoComponent implements OnInit {
       nombre: ['',[Validators.required]],
       descripcion: ['',[Validators.required]],
       imgProyecto: ['',[Validators.required]],
-      urlProyecto: ['',[Validators.required]]
+      urlProyecto: ['',[Validators.required]],
+      githubProyecto: ['',[Validators.required]]
     });
     this.formEditar = this.formBuilder.group({
       nombre: ['',[Validators.required]],
       descripcion: ['',[Validators.required]],
       imgProyecto: ['',[Validators.required]],
-      urlProyecto: ['',[Validators.required]]
+      urlProyecto: ['',[Validators.required]],
+      githubProyecto: ['',[Validators.required]]
     });
   }
 
@@ -55,7 +57,8 @@ export class ProyectoComponent implements OnInit {
         nombre: this.formNuevo.get('nombre')?.value,
         descripcion: this.formNuevo.get('descripcion')?.value,
         imgProyecto: this.formNuevo.get('imgProyecto')?.value,
-        urlProyecto: this.formNuevo.get('urlProyecto')?.value
+        urlProyecto: this.formNuevo.get('urlProyecto')?.value,
+        githubProyecto: this.formNuevo.get('githubProyecto')?.value
       }
    
       this.proyectoService.save(proyectoNuevo).subscribe(data => {
@@ -73,7 +76,8 @@ export class ProyectoComponent implements OnInit {
         nombre: this.formEditar.get('nombre')?.value,
         descripcion: this.formEditar.get('descripcion')?.value,
         imgProyecto: this.formEditar.get('imgProyecto')?.value,
-        urlProyecto: this.formEditar.get('urlProyecto')?.value
+        urlProyecto: this.formEditar.get('urlProyecto')?.value,
+        githubProyecto: this.formEditar.get('githubProyecto')?.value
       }
 
       proyectoEditar.id = this.id;
@@ -100,7 +104,8 @@ export class ProyectoComponent implements OnInit {
       nombre: proyecto.nombre,
       descripcion: proyecto.descripcion,
       imgProyecto: proyecto.imgProyecto,
-      urlProyecto: proyecto.urlProyecto
+      urlProyecto: proyecto.urlProyecto,
+      githubProyecto: proyecto.githubProyecto
     })
   }
 

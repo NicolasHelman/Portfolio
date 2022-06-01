@@ -20,7 +20,7 @@
                         <h4>{{proyecto.nombre}}</h4>
                         <p>{{proyecto.descripcion}}</p>
                         <div class="proyectos-links">
-                            <a href="{{proyecto.urlProyecto}}" target="_blank" data-gallery="proyectosDetailsGallery" data-glightbox="type: external" class="proyectos-details-lightbox" title="Ver Código"><i class="fab fa-github mt-3 me-2"></i></a>
+                            <a href="{{proyecto.githubProyecto}}" target="_blank" data-gallery="proyectosDetailsGallery" data-glightbox="type: external" class="proyectos-details-lightbox" title="Ver Código"><i class="fab fa-github mt-3 me-2"></i></a>
                             <a href="{{proyecto.urlProyecto}}" target="_blank" data-gallery="proyectosDetailsGallery" data-glightbox="type: external" class="proyectos-details-lightbox" title="Ver Proyecto"><i class="fas fa-link mt-3 ms-2"></i></a>
                         </div>
                     </div>
@@ -62,6 +62,13 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <input type="text" class="form-control" id="imgProyectoNuevo" formControlName="imgProyecto">
                         <div *ngIf="formNuevo.get('imgProyecto')?.invalid && (formNuevo.get('imgProyecto')?.dirty || formNuevo.get('imgProyecto')?.touched)">
                             <small class="text-danger fw-bolder" *ngIf="formNuevo.get('imgProyecto')?.hasError('required')">*Ingrese una foto del proyecto</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="githubProyectoNuevo" class="col-form-label text-light">GitHub del proyecto:</label>
+                        <input type="text" class="form-control" id="githubProyectoNuevo" formControlName="githubProyecto">
+                        <div *ngIf="formNuevo.get('githubProyecto')?.invalid && (formNuevo.get('githubProyecto')?.dirty || formNuevo.get('githubProyecto')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('githubProyecto')?.hasError('required')">*Ingrese el github del proyecto</small>
                         </div>
                     </div>
                     <div>
@@ -112,6 +119,13 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <input type="text" class="form-control" id="imgProyectoEditar" formControlName="imgProyecto">
                         <div *ngIf="formEditar.get('imgProyecto')?.invalid && (formEditar.get('imgProyecto')?.dirty || formEditar.get('imgProyecto')?.touched)">
                             <small class="text-danger fw-bolder" *ngIf="formEditar.get('imgProyecto')?.hasError('required')">*Ingrese una foto del proyecto</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="githubProyectoNuevo" class="col-form-label text-light">GitHub del proyecto:</label>
+                        <input type="text" class="form-control" id="githubProyectoNuevo" formControlName="githubProyecto">
+                        <div *ngIf="formEditar.get('githubProyecto')?.invalid && (formEditar.get('githubProyecto')?.dirty || formEditar.get('githubProyecto')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('githubProyecto')?.hasError('required')">*Ingrese el github del proyecto</small>
                         </div>
                     </div>
                     <div>
