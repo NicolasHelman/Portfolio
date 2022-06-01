@@ -15,17 +15,19 @@ public class Proyecto {
     private String descripcion;
     private String imgProyecto;
     private String urlProyecto;
+    private String githubProyecto;
     
     public Proyecto() {
     	
     }
 
-	public Proyecto(Long id, String nombre, String descripcion, String imgProyecto, String urlProyecto) {
+	public Proyecto(Long id, String nombre, String descripcion, String imgProyecto, String urlProyecto, String githubProyecto) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.imgProyecto = imgProyecto;
 		this.urlProyecto = urlProyecto;
+		this.githubProyecto = githubProyecto;
 	}
 
 	public Long getId() {
@@ -68,4 +70,12 @@ public class Proyecto {
 		this.urlProyecto = urlProyecto;
 	}
 
+	public String getGithubProyecto() {
+		return githubProyecto;
+	}
+
+	public void setGithubProyecto(String githubProyecto) {
+		this.githubProyecto = githubProyecto;
+	}
+	
 }

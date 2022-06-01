@@ -51,6 +51,7 @@ public class ProyectoController {
     	proyecto.setDescripcion(p.getDescripcion());
     	proyecto.setImgProyecto(p.getImgProyecto());
     	proyecto.setUrlProyecto(p.getUrlProyecto());
+    	proyecto.setGithubProyecto(p.getGithubProyecto());
     	
     	proyectoService.save(proyecto); 
         
