@@ -128,13 +128,15 @@
     if (typed) {
       let typed_strings = typed.getAttribute('data-typed-items')
       typed_strings = typed_strings?.split(',') // operador de encadenamiento opcional (?.), que cortocircuita devolviendo sin definir si el valor a la izquierda es 'null' o 'undefined'
-      new Typed('.typed', {
-        strings: typed_strings,
-        loop: true, // Repetir el array de strings
-        typeSpeed: 100, // Velocidad en mlisegundos para poner una letra
-        backSpeed: 50, // Velocidad en milisegundos para borrrar una letra
-        backDelay: 2000 // Tiempo de espera despues de que termina de escribir una palabra
-      });
+      if (typed_strings?.length > 0) {
+        new Typed('.typed', {
+          strings: typed_strings,
+          loop: true, // Repetir el array de strings
+          typeSpeed: 100, // Velocidad en mlisegundos para poner una letra
+          backSpeed: 50, // Velocidad en milisegundos para borrrar una letra
+          backDelay: 2000 // Tiempo de espera despues de que termina de escribir una palabra
+        });
+      }
     }
 
         /**
