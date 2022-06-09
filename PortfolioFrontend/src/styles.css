@@ -34,6 +34,7 @@ h1, h2, h3, h4, h5, h6 {
   --color-negro: #111;
   --color-icon: #212431;
   --bg-dark: #040b14;
+  --bg-input: #2b2f3f;
   --text-header: #a8a9b4;
   --textsecond-header: #6f7180;
 }
@@ -596,7 +597,7 @@ section {
   cursor: pointer;
 }
 .acerca-de .content p {
-  font-size: 20px;
+  font-size: 18px;
 }
 .acerca-de .content p:last-child {
   margin-bottom: 0;
@@ -1044,7 +1045,7 @@ section {
 # Social
 --------------------------------------------------------------*/
 .social {
-  padding: 250px 50px;
+  padding: 150px 50px;
 }
 .social .social-item {
   margin-bottom: 30px;
@@ -1097,6 +1098,74 @@ section {
 }
 .social .opciones i:hover {
   color: var(--color-primario);
+}
+
+/*--------------------------------------------------------------
+# Contacto
+--------------------------------------------------------------*/
+.contacto {
+  padding: 150px 50px;
+}
+.contacto .descripcion p {
+  font-size: 18px;
+}
+.contacto .contacto-form input::-moz-placeholder, .contacto .contacto-form textarea::-moz-placeholder {
+  color: var(--text-header);
+  opacity: 1;
+}
+.contacto .contacto-form input::placeholder, .contacto .contacto-form textarea::placeholder {
+  color: var(--text-header);
+  opacity: 1;
+}
+.contacto .contacto-form .form-control {
+  border-radius: 5px;
+}
+.contacto .contacto-form input {
+  padding: 10px 15px;
+  height: 50px;
+}
+.contacto .contacto-form textarea {
+  padding: 10px 15px;
+}
+.contacto .contacto-form input, .contacto .contacto-form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 15px;
+  background: var(--color-icon);
+  border: 0;
+  transition: 0.3s;
+  color: var(--color-blanco);
+}
+.contacto .contacto-form input:focus, .contacto .contacto-form textarea:focus {
+  background-color: var(--bg-input);
+}
+.contacto .contacto-form button[type=submit] {
+  background: var(--color-terciario);
+  color: var(--color-negro);
+  border: 0;
+  padding: 10px 30px;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+.contacto .contacto-form button[type=submit]:hover {
+  background: var(--color-primario);
+}
+
+@-webkit-keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*--------------------------------------------------------------

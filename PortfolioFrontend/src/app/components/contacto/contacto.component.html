@@ -1,0 +1,54 @@
+<section id="contacto" class="contacto animacion">
+    <div class="container">
+
+        <div class="section-title">
+            <div>
+                <h2>Contacto</h2>
+            </div>               
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+
+                <div class="descripcion">
+                    <p>Si tienes algún proyecto en mente no dudes en contactarme.</p>
+                </div>
+
+                <form [formGroup]="formContacto" class="contacto-form mt-5">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" class="form-control" id="nombreContacto" placeholder="Nombre y Apellido" formControlName="nombre">
+                            <div *ngIf="formContacto.get('nombre')?.invalid && (formContacto.get('nombre')?.dirty || formContacto.get('nombre')?.touched)">
+                                <small class="text-danger fw-bolder" *ngIf="formContacto.get('nombre')?.hasError('required')">*Ingrese el nombre y apellido</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" class="form-control" id="mailContacto" placeholder="Email" formControlName="mail">
+                            <div *ngIf="formContacto.get('mail')?.invalid && (formContacto.get('mail')?.dirty || formContacto.get('mail')?.touched)">
+                                <small class="text-danger fw-bolder" *ngIf="formContacto.get('mail')?.hasError('required')">*Ingrese el email</small>
+                                <small class="text-danger fw-bolder" *ngIf="formContacto.get('mail')?.hasError('email')">*La dirección de email no es correcta</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" id="asuntoContacto" placeholder="Asunto" formControlName="asunto">
+                        <div *ngIf="formContacto.get('asunto')?.invalid && (formContacto.get('asunto')?.dirty || formContacto.get('asunto')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formContacto.get('asunto')?.hasError('required')">*Ingrese el asunto</small>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" rows="7" placeholder="Mensaje" id="mensajeContacto" formControlName="mensaje"></textarea>
+                        <div *ngIf="formContacto.get('mensaje')?.invalid && (formContacto.get('mensaje')?.dirty || formContacto.get('mensaje')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formContacto.get('mensaje')?.hasError('required')">*Ingrese el mensaje</small>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button (click)="submitContacto()" [disabled]="this.formContacto.invalid" type="submit"><i class="fas fa-paper-plane me-2"></i>Enviar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>    
+
+    </div>
+</section>

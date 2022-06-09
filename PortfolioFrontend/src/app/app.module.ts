@@ -21,6 +21,7 @@ import { ExperienciaComponent } from './components/experiencia/experiencia.compo
 import { HabilidadComponent } from './components/habilidad/habilidad.component';
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { SocialComponent } from './components/social/social.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { SocialComponent } from './components/social/social.component';
     ExperienciaComponent,
     HabilidadComponent,
     ProyectoComponent,
-    SocialComponent
+    SocialComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
