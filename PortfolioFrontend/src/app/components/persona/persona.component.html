@@ -1,4 +1,4 @@
-<header id="header">
+<header *ngIf="persona" id="header">
     <div class="d-flex flex-column">
         <div class="barra d-flex">
 
@@ -72,7 +72,7 @@
     </div>
 </header>
 
-<section id="persona" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url({{persona.imgPortada}})">
+<section *ngIf="persona" id="persona" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url({{persona.imgPortada}})">
     <div class="persona-container mostrarArriba" data-aos="fade-in">
         <div class="d-flex icon">
             <h1>{{persona.nombre}}</h1>
