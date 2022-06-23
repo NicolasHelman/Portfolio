@@ -179,7 +179,7 @@
         if (alturaAnimado -550 < scrollTop) {
           animado[i].style.opacity = 1;
           animado[i].classList.add("mostrarArriba");
-          animado[i].classList.add("mostrarDerecha");
+          //animado[i].classList.add("mostrarDerecha");
         }
       }
     }

@@ -1140,15 +1140,17 @@ section {
   background-color: var(--bg-input);
 }
 .contacto .contacto-form button[type=submit] {
-  background: var(--color-terciario);
+  background: var(--color-secundario);
   color: var(--color-negro);
   border: 0;
   padding: 10px 30px;
   transition: 0.4s;
   border-radius: 4px;
+  font-weight: 600;
 }
 .contacto .contacto-form button[type=submit]:hover {
   background: var(--color-primario);
+  box-shadow: 0 4px 17px rgba(170, 170, 170, 0.35);
 }
 
 @-webkit-keyframes animate-loading {
@@ -1181,7 +1183,7 @@ section {
 */
 
 .mostrarArriba {
-  animation: mostrarArriba 1s;
+  animation: mostrarArriba 1.5s;
 }
 @keyframes mostrarArriba {
   0%{
