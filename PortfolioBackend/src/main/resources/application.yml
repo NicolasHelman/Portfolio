@@ -38,4 +38,9 @@ server:
       tracking-modes:
       - cookie
   port: 8080 # This is the default port anyway, but you can change it here
+security:
+  jwt:
+    token:
+      secret-key: secret
+      expire-length: 10000 # 20 segundos -- 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
 
