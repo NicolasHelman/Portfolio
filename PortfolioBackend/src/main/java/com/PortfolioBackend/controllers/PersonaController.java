@@ -3,6 +3,7 @@ package com.PortfolioBackend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.OK).body(persona);
     }
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/save")
     public ResponseEntity<Persona> save(@RequestBody Persona persona) {
 		Persona p = personaService.findById(persona.getId());
@@ -40,6 +42,7 @@ public class PersonaController {
 		return ResponseEntity.status(HttpStatus.OK).body(p);
     }
     
+	@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<Persona> update(@RequestBody Persona persona) {
         personaService.save(persona); 
@@ -47,6 +50,7 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.OK).body(persona);
     }
     
+	@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Persona> delete(@PathVariable Long id) {
     	personaService.delete(id);

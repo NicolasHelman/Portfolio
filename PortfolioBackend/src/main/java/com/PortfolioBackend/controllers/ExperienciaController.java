@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +34,7 @@ public class ExperienciaController {
 		return experienciaService.list();
     }
 	
+	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<Experiencia> save(@RequestBody Experiencia experiencia) {     
     	experienciaService.save(experiencia);
@@ -42,6 +43,7 @@ public class ExperienciaController {
         
     }
     
+	@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<Experiencia> update(@PathVariable Long id, @RequestBody Experiencia e) {
         
@@ -59,6 +61,7 @@ public class ExperienciaController {
 
     }
     
+	@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Experiencia> delete(@PathVariable Long id) {
     	experienciaService.delete(id);

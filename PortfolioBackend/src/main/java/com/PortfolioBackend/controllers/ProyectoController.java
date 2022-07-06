@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +34,7 @@ public class ProyectoController {
 		return proyectoService.list();
     }
 	
+	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<Proyecto> save(@RequestBody Proyecto proyecto) {    
     	proyectoService.save(proyecto);
@@ -42,6 +43,7 @@ public class ProyectoController {
         
     }
     
+	@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<Proyecto> update(@PathVariable Long id, @RequestBody Proyecto p) {
         
@@ -59,6 +61,7 @@ public class ProyectoController {
 
     }
     
+	@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Proyecto> delete(@PathVariable Long id) {
     	proyectoService.delete(id);
