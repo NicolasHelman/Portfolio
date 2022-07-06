@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import com.PortfolioBackend.errors.Mensaje;
 import com.PortfolioBackend.security.dtos.JwtDto;
 import com.PortfolioBackend.security.dtos.LoginUsuario;
 import com.PortfolioBackend.security.dtos.NuevoUsuario;
@@ -48,6 +49,13 @@ public class AuthController {
 
 	@PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors())
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Mensaje("Ha ocurrido un error"));
+        if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
+        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Mensaje("Nombre de usuario no disponible"));
+        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
+        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Mensaje("Email no disponible"));
 
         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
         
@@ -61,7 +69,7 @@ public class AuthController {
     
         usuarioService.save(usuario);
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Mensaje("Usuario registrado correctamente"));
     }
 
     @PostMapping("/login")
