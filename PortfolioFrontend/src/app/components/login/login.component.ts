@@ -12,11 +12,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class LoginComponent implements OnInit {
 
-  isLogged = false;
-  isLoginFail = false;
   loginUsuario!: LoginUsuario;
-  roles: string[] = [];
-  errMsj: string;
   formLogin: FormGroup;
 
   constructor(
@@ -32,11 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-      this.isLoginFail = false;
-      this.roles = this.tokenService.getAuthorities();
-    }
   }
 
   submitLogin(): void {
@@ -50,16 +41,11 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(loginUsuario).subscribe(
         data => {
-          this.isLogged = true;
           this.tokenService.setToken(data.token);
-          this.tokenService.setUsername(data.nombreUsuario);
-          this.tokenService.setAuthorities(data.authorities);
-          this.roles = data.authorities;
           this.closeForm();
           window.location.reload();
         },
         err => {
-          this.isLogged = false;
           this.toastr.error('Usuario o Contraseña incorrectos', 'Error');
         }
       );

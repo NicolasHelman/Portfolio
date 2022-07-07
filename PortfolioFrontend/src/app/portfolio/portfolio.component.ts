@@ -9,8 +9,7 @@ import { TokenService } from '../services/token.service';
 })
 export class PortfolioComponent implements OnInit {
 
-  isLogged = false;
-  nombreUsuario = '';
+  nombreUsuario: string;
 
   constructor(
     private tokenService: TokenService,
@@ -18,12 +17,10 @@ export class PortfolioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-      this.nombreUsuario = this.tokenService.getUsername();
+    this.nombreUsuario = this.tokenService.getUsername();
+    if (this.nombreUsuario) {
       this.toastr.success('Bienvenido ' + this.nombreUsuario, 'Portfolio');
     } else {
-      this.isLogged = false;
       this.nombreUsuario = '';
     }
   }
