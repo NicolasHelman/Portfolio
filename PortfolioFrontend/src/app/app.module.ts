@@ -4,15 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 // components
 import { AppComponent } from './app.component';
 import { PersonaComponent } from './components/persona/persona.component';
-
-// external
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-
-// para consumir la api
-import { HttpClientModule } from '@angular/common/http';
-// para la creacion del formulario y utilizar el doble binding
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
@@ -23,6 +14,17 @@ import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { SocialComponent } from './components/social/social.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { LoginComponent } from './components/login/login.component';
+
+// external
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
+// para consumir la api
+import { HttpClientModule } from '@angular/common/http';
+// para la creacion del formulario y utilizar el doble binding
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// interceptor provider
+import { interceptorProvider } from './services/interceptor.service';
 
 
 @NgModule({
@@ -48,7 +50,7 @@ import { LoginComponent } from './components/login/login.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
