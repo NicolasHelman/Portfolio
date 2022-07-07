@@ -74,10 +74,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
-    	
-        if(bindingResult.hasErrors())
-        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        
+    	  
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
         
         SecurityContextHolder.getContext().setAuthentication(authentication);
