@@ -16,39 +16,14 @@
             </div>
             
             <div class="login icon">
-                <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <a *ngIf="!isLogged" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
                     <i class="fas fa-sign-in-alt"></i>
                 </a>
+                <a *ngIf="isLogged" (click)="logout()" type="button" class="btn">
+                    <i class="fas fa-power-off"></i>
+                </a>
             </div>
-            <!-- Modal Login -->
-            <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content" style="background-image: url(assets/img/fondo-login.jpg)">
-                    <div class="modal-header">
-                      <img src="assets/img/argentina-programa.png" alt="">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <i class="text-center mt-2 fas fa-user-circle"></i>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <label for="username" class="col-form-label text-light">Username:</label>
-                          <input type="text" class="form-control" id="username">
-                        </div>
-                        <div class="mb-3">
-                          <label for="password" class="col-form-label text-light">Password:</label>
-                          <input type="password" class="form-control" id="password">
-                        </div>
-                        <div class="modal-footer mt-4">
-                          <button type="button" class="btn btn-dark">Acceder</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-            </div>
-                    
+
         </div>
         
         <div class="profile">
@@ -83,6 +58,9 @@
 
     </div>
 </section>
+
+<!-- MODAL LOGIN -->
+<app-login></app-login>
 
 <!-- MODAL PERSONA -->
 <div class="modal fade form-modal" id="PersonaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortfolioComponent implements OnInit {
 
-  constructor() { }
+  isLogged = false;
+  nombreUsuario = '';
 
-  ngOnInit(): void {
+  constructor(
+    private tokenService: TokenService,
+    private toastr: ToastrService
+  ) { }
+
+  ngOnInit() {
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;
+      this.nombreUsuario = this.tokenService.getUsername();
+      this.toastr.success('Bienvenido ' + this.nombreUsuario, 'Portfolio');
+    } else {
+      this.isLogged = false;
+      this.nombreUsuario = '';
+    }
   }
 
 }

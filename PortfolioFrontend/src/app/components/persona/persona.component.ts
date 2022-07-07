@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from 'src/app/models/persona';
 import { PersonaService } from 'src/app/services/persona.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-persona',
@@ -13,11 +14,13 @@ export class PersonaComponent implements OnInit {
 
   persona!: Persona;
   formPersona: FormGroup;
+  isLogged = false;
 
   constructor(
     private personaService: PersonaService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private tokenService: TokenService
   ) { 
     this.formPersona = this.formBuilder.group({
       nombre: ['', [Validators.required]],
@@ -30,6 +33,11 @@ export class PersonaComponent implements OnInit {
 
   ngOnInit(): void {
     this.view();
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   view(): void {
@@ -72,6 +80,11 @@ export class PersonaComponent implements OnInit {
     this.formPersona.controls["imgPortada"].setValue(this.persona.imgPortada);
     this.formPersona.controls["cargo"].setValue(this.persona.cargo);
     this.formPersona.controls["tipoCargo"].setValue(this.persona.tipoCargo);
+  }
+
+  logout(): void {
+    this.tokenService.logOut();
+    window.location.reload();
   }
 
   closeForm(): void{

@@ -1,0 +1,35 @@
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-image: url(assets/img/fondo-login.jpg)">
+            <div class="modal-header">
+                <img src="assets/img/argentina-programa.png" alt="">
+                <button id="closeModalLogin" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <i class="text-center mt-2 fas fa-user-circle"></i>
+            <div class="modal-body">
+                <form [formGroup]="formLogin">
+                    <div class="mb-3">
+                        <label for="nombreUsuario" class="col-form-label text-light">Username:</label>
+                        <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario">
+                        <div *ngIf="formLogin.get('nombreUsuario')?.invalid && (formLogin.get('nombreUsuario')?.dirty || formLogin.get('nombreUsuario')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formLogin.get('nombreUsuario')?.hasError('required')">*Ingrese el nombre de usuario</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label text-light">Password:</label>
+                        <input type="password" class="form-control" id="password" formControlName="password">
+                        <div *ngIf="formLogin.get('password')?.invalid && (formLogin.get('password')?.dirty || formLogin.get('password')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formLogin.get('password')?.hasError('required')">*Ingrese la contraseña</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="submitLogin()" [disabled]="this.formLogin.invalid" type="submit" class="btn btn-dark">Acceder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

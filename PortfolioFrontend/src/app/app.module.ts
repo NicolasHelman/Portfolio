@@ -22,6 +22,7 @@ import { HabilidadComponent } from './components/habilidad/habilidad.component';
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { SocialComponent } from './components/social/social.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ContactoComponent } from './components/contacto/contacto.component';
     HabilidadComponent,
     ProyectoComponent,
     SocialComponent,
-    ContactoComponent
+    ContactoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
