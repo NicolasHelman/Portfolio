@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Habilidad } from 'src/app/models/habilidad';
 import { HabilidadService } from 'src/app/services/habilidad.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-habilidad',
@@ -15,11 +16,13 @@ export class HabilidadComponent implements OnInit {
   formNuevo: FormGroup;
   formEditar: FormGroup;
   id: number | undefined;
+  isAdmin = false;
   
   constructor(
     private habilidadService: HabilidadService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private tokenService: TokenService
   ) {
     this.formNuevo =  this.formBuilder.group({
       tipo: ["",[Validators.required]],
@@ -33,6 +36,7 @@ export class HabilidadComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
+    this.isAdmin = this.tokenService.isAdmin();
   }
 
   list(): void {

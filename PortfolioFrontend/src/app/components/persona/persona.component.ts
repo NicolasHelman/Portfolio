@@ -15,6 +15,7 @@ export class PersonaComponent implements OnInit {
   persona!: Persona;
   formPersona: FormGroup;
   isLogged = false;
+  isAdmin = false;
 
   constructor(
     private personaService: PersonaService,
@@ -33,11 +34,8 @@ export class PersonaComponent implements OnInit {
 
   ngOnInit(): void {
     this.view();
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
+    this.isLogged = this.tokenService.isLogged();
+    this.isAdmin = this.tokenService.isAdmin();
   }
 
   view(): void {

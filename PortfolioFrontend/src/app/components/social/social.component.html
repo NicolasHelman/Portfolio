@@ -4,7 +4,7 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Redes</h2>
-                <a (click)="nuevoSocial()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoSocialModal"><i class="fas fa-plus-square"></i></a>
+                <a *ngIf="isAdmin" (click)="nuevoSocial()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoSocialModal"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
 
@@ -12,7 +12,7 @@
             <div *ngFor="let social of listSocial" class="col-lg-4 col-md-6 social-item" data-aos="fade-up">
                 <div class="icon-box" data-aos="fade-up">
 
-                    <div class="d-flex opciones">
+                    <div *ngIf="isAdmin" class="d-flex opciones">
                         <a (click)="editarSocial(social)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarSocialModal"><i class="fas fa-edit"></i></a>
                         <a (click)="eliminarSocial(social.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
                     </div>

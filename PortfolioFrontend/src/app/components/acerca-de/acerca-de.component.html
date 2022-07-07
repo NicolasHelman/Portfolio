@@ -4,14 +4,14 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Acerca de mí</h2>
-                <a *ngIf="listAcercaDe?.length == 0" (click)="nuevoAcercaDe()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoAcercaDeModal"><i class="fas fa-plus-square"></i></a>
+                <a *ngIf="listAcercaDe?.length == 0 && isAdmin" (click)="nuevoAcercaDe()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoAcercaDeModal"><i class="fas fa-plus-square"></i></a>
             </div>               
         </div>
 
         <div *ngIf="listAcercaDe?.length == 1" class="row">
             <div *ngFor="let acercaDe of listAcercaDe" class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
 
-                <div class="d-flex opciones">
+                <div *ngIf="isAdmin" class="d-flex opciones">
                     <a (click)="editarAcercaDe(acercaDe)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarAcercaDeModal"><i class="fas fa-edit"></i></a>
                     <a (click)="eliminarAcercaDe(acercaDe.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
                 </div>

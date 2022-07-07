@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Educacion } from 'src/app/models/educacion';
 import { EducacionService } from 'src/app/services/educacion.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-educacion',
@@ -15,11 +16,13 @@ export class EducacionComponent implements OnInit {
   formNuevo: FormGroup;
   formEditar: FormGroup;
   id: number | undefined;
+  isAdmin = false;
 
   constructor(
     private educacionService: EducacionService,
     private formBuilder: FormBuilder, 
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private tokenService: TokenService
   ) {
     this.formNuevo = this.formBuilder.group({
       institucion: ['',[Validators.required]],
@@ -39,6 +42,7 @@ export class EducacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
+    this.isAdmin = this.tokenService.isAdmin();
   }
 
   list(): void {

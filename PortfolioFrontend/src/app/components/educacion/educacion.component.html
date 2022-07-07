@@ -4,13 +4,13 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Educación</h2>
-                <a (click)="nuevoEducacion()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoEducacionModal"><i class="fas fa-plus-square"></i></a>
+                <a *ngIf="isAdmin" (click)="nuevoEducacion()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoEducacionModal"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
 
         <div class="row" >
             <div *ngFor="let educacion of listEducacion" class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-                <div class="d-flex opciones">
+                <div *ngIf="isAdmin" class="d-flex opciones">
                     <a (click)="editarEducacion(educacion)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarEducacionModal"><i class="fas fa-edit"></i></a>
                     <a (click)="eliminarEducacion(educacion.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
                 </div>

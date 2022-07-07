@@ -51,7 +51,7 @@
     <div class="persona-container mostrarArriba" data-aos="fade-in">
         <div class="d-flex icon">
             <h1>{{persona.nombre}}</h1>
-            <a (click)="editarPersona()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#PersonaModal"><i class="fas fa-edit"></i></a>
+            <a *ngIf="isAdmin" (click)="editarPersona()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#PersonaModal"><i class="fas fa-edit"></i></a>
         </div>
         
         <p>{{persona.cargo}} <span class="typed" attr.data-typed-items="{{persona.tipoCargo}}"></span></p>

@@ -4,7 +4,7 @@
         <div class="section-title">
             <div class="d-flex">
                 <h2>Proyectos</h2>
-                <a (click)="nuevoProyecto()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoProyectoModal"><i class="fas fa-plus-square"></i></a>
+                <a *ngIf="isAdmin" (click)="nuevoProyecto()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoProyectoModal"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
 
@@ -13,7 +13,7 @@
                 <div class="proyectos-wrap">
                     <img src="{{proyecto.imgProyecto}}" class="img-fluid" alt="">
                     <div class="proyectos-info">
-                        <div class="d-flex opciones">
+                        <div *ngIf="isAdmin" class="d-flex opciones">
                             <a (click)="editarProyecto(proyecto)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarProyectoModal"><i class="fas fa-edit"></i></a>
                             <a (click)="eliminarProyecto(proyecto.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
                         </div>
