@@ -21,6 +21,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
 
+img {
+  user-select: none;
+}
+
 /*--------------------------------------------------------------
 :root - Colores de la pagina
 --------------------------------------------------------------*/
@@ -982,7 +986,7 @@ section {
 }
 .proyectos .proyectos-wrap .proyectos-info p {
   color: var(--color-blanco);
-  font-size: 14px;
+  font-size: 15px;
   padding: 0;
   margin: 0;
 }
