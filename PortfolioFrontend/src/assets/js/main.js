@@ -1,6 +1,17 @@
 
 (function() {
     "use strict";
+
+    /**
+     * Se desplaza a un elemento 'a' con el id. Por ejemplo, #experiencia
+     */
+    const scrollto = (el) => {
+      let elementPos = select(el).offsetTop
+      window.scrollTo({
+        top: elementPos,
+        behavior: 'smooth'
+      })
+    }
   
     /**
      * Función de ayuda al selector fácil
@@ -81,16 +92,7 @@
       this.classList.toggle('fa-times-circle')
     })
 
-        /**
-     * Se desplaza a un elemento 'a' con el id. Por ejemplo, #experiencia
-     */
-         const scrollto = (el) => {
-          let elementPos = select(el).offsetTop
-          window.scrollTo({
-            top: elementPos,
-            behavior: 'smooth'
-          })
-        }
+
   
     /**
      * Scroll con desplazamiento en los enlaces con nombre de clase .scrollto
