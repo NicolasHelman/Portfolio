@@ -3,7 +3,6 @@
         <div class="barra d-flex">
 
             <div class="dark-mode icon">
-                <!--Theme change button-->
                 <a href="">
                     <i class="fas fa-moon change-theme" id="theme-button"></i>
                 </a>
@@ -23,6 +22,9 @@
                     <i class="fas fa-power-off"></i>
                 </a>
             </div>
+
+            <!-- MODAL LOGIN -->
+            <app-login></app-login>
 
         </div>
         
@@ -49,6 +51,7 @@
 
 <section *ngIf="persona" id="persona" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url({{persona.imgPortada}})">
     <div class="persona-container mostrarArriba" data-aos="fade-in">
+        
         <div class="d-flex icon">
             <h1>{{persona.nombre}}</h1>
             <a *ngIf="isAdmin" (click)="editarPersona()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#PersonaModal"><i class="fas fa-edit"></i></a>
@@ -58,9 +61,6 @@
 
     </div>
 </section>
-
-<!-- MODAL LOGIN -->
-<app-login></app-login>
 
 <!-- MODAL PERSONA -->
 <div class="modal fade form-modal" id="PersonaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
