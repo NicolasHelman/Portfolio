@@ -1213,38 +1213,38 @@ section {
 /*--------------------------------------------------------------
 # Modal-Login
 --------------------------------------------------------------*/
-#loginModal {
+.loginRegistroModal {
   margin-top: 50px;
 }
-#loginModal .modal-body {
+.loginRegistroModal .modal-body {
   width: 60%;
   margin: auto;
 }
-#loginModal .modal-header button {
+.loginRegistroModal .modal-header button {
   background-color: var(--color-blanco);
   opacity: 5;
 }
-#loginModal .modal-header button:hover {
+.loginRegistroModal .modal-header button:hover {
   background-color: rgba(255, 255, 255, 0.733);
 }
-.modal-header img {
+.loginRegistroModal .modal-header img {
   height: 45px;
 }
-#loginModal .modal-content {
+.loginRegistroModal .modal-content {
   width: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-#loginModal .modal-content i {
+.loginRegistroModal .modal-content i {
   font-size: 120px;
   color: var(--color-blanco);
 }
-#loginModal .modal-footer button {
+.loginRegistroModal .modal-footer button {
   margin: auto;
   border-color: var(--color-blanco);
 }
-#loginModal .modal-footer button:hover {
+.loginRegistroModal .modal-footer button:hover {
   margin: auto;
   background-color: var(--color-blanco);
   color: var(--color-negro);

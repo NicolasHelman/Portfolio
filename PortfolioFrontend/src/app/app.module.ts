@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // interceptor provider
 import { interceptorProvider } from './services/interceptor.service';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { interceptorProvider } from './services/interceptor.service';
     ProyectoComponent,
     SocialComponent,
     ContactoComponent,
-    LoginComponent
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

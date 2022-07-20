@@ -1,0 +1,48 @@
+<div class="modal fade loginRegistroModal" id="registroModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-image: url(assets/img/fondo-login.jpg)">
+            <div class="modal-header">
+                <img src="assets/img/argentina-programa.png" alt="">
+                <button id="closeModalRegistro" type="button" class="btn-close" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <i class="text-center mt-2 fas fa-user-circle"></i>
+            <div class="modal-body">
+                <form [formGroup]="formRegistro">
+                    <div class="mb-3">
+                        <label for="nombreRegistro" class="col-form-label text-light">Nombre y Apellido:</label>
+                        <input type="text" class="form-control" id="nombreRegistro" formControlName="nombre">
+                        <div *ngIf="formRegistro.get('nombre')?.invalid && (formRegistro.get('nombre')?.dirty || formRegistro.get('nombre')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formRegistro.get('nombre')?.hasError('required')">*Ingrese el nombre</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreUsuarioRegistro" class="col-form-label text-light">Username:</label>
+                        <input type="text" class="form-control" id="nombreUsuarioRegistro" formControlName="nombreUsuario">
+                        <div *ngIf="formRegistro.get('nombreUsuario')?.invalid && (formRegistro.get('nombreUsuario')?.dirty || formRegistro.get('nombreUsuario')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formRegistro.get('nombreUsuario')?.hasError('required')">*Ingrese el nombre de usuario</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailUsuarioRegistro" class="col-form-label text-light">Email:</label>
+                        <input type="text" class="form-control" id="emailUsuarioRegistro" formControlName="email">
+                        <div *ngIf="formRegistro.get('email')?.invalid && (formRegistro.get('email')?.dirty || formRegistro.get('email')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formRegistro.get('email')?.hasError('required')">*Ingrese el email</small>
+                            <small class="text-danger fw-bolder" *ngIf="formRegistro.get('email')?.hasError('email')">*La dirección de email no es correcta</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordUsuarioRegistro" class="col-form-label text-light">Password:</label>
+                        <input type="password" class="form-control" id="passwordUsuarioRegistro" formControlName="password">
+                        <div *ngIf="formRegistro.get('password')?.invalid && (formRegistro.get('password')?.dirty || formRegistro.get('password')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formRegistro.get('password')?.hasError('required')">*Ingrese la contraseña</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button (click)="submitRegistro()" [disabled]="this.formRegistro.invalid" type="submit" class="btn btn-dark">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
