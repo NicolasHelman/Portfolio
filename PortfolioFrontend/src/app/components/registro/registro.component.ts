@@ -15,6 +15,7 @@ export class RegistroComponent implements OnInit {
   nuevoUsuario!: NuevoUsuario;
   formRegistro: FormGroup;
   isLogged = false;
+  errMsj: string;
 
   constructor(
     private tokenService: TokenService,
@@ -53,7 +54,8 @@ export class RegistroComponent implements OnInit {
           this.closeForm();
 
         }, error => {
-          this.toastr.error('Error al registrarse', 'Error');
+          this.errMsj = error.error.mensaje;
+          this.toastr.error(this.errMsj, 'Error');
         }
       );
 
