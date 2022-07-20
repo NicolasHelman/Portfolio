@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.PortfolioBackend.models.Educacion;
+import com.PortfolioBackend.security.models.Usuario;
+import com.PortfolioBackend.security.services.UsuarioService;
 import com.PortfolioBackend.services.EducacionService;
 
 @RestController
@@ -28,6 +30,9 @@ public class EducacionController {
 	@Autowired
 	private EducacionService educacionService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@ResponseBody
 	@GetMapping("/list")
     public List<Educacion> list() {
@@ -36,7 +41,11 @@ public class EducacionController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
-    public ResponseEntity<Educacion> save(@RequestBody Educacion educacion) {     
+    public ResponseEntity<Educacion> save(@RequestBody Educacion educacion) {    
+		
+		Usuario usuario = usuarioService.findBySesionUsuario();
+		
+		educacion.setUsuario(usuario);
     	
     	educacionService.save(educacion);
         

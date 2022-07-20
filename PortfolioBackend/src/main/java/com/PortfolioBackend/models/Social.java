@@ -1,9 +1,15 @@
 package com.PortfolioBackend.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.PortfolioBackend.security.models.Usuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Social {
@@ -14,17 +20,21 @@ public class Social {
     private String nombre;
     private String urlSocial;
     private String colorSocial;
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "usuario_id")
+	@JsonBackReference
+	private Usuario usuario;
     
     public Social() {
     	
     }
 
-	public Social(Long id, String nombre, String urlSocial, String colorSocial) {
-		super();
+	public Social(Long id, String nombre, String urlSocial, String colorSocial, Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
 		this.urlSocial = urlSocial;
 		this.colorSocial = colorSocial;
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -59,4 +69,11 @@ public class Social {
 		this.colorSocial = colorSocial;
 	}
     
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

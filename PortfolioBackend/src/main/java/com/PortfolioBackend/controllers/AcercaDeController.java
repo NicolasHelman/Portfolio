@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.PortfolioBackend.models.AcercaDe;
+import com.PortfolioBackend.security.models.Usuario;
+import com.PortfolioBackend.security.services.UsuarioService;
 import com.PortfolioBackend.services.AcercaDeService;
 
 @RestController
@@ -28,6 +30,9 @@ public class AcercaDeController {
 	@Autowired
 	private AcercaDeService acercaDeService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@ResponseBody
 	@GetMapping("/list")
     public List<AcercaDe> list() {
@@ -37,6 +42,10 @@ public class AcercaDeController {
 	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<AcercaDe> save(@RequestBody AcercaDe acercaDe) {   
+		
+		Usuario usuario = usuarioService.findBySesionUsuario();
+		
+		acercaDe.setUsuario(usuario);
     	
     	acercaDeService.save(acercaDe);
      

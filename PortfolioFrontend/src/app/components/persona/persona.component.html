@@ -1,4 +1,4 @@
-<header *ngIf="persona" id="header">
+<header id="header">
     <div class="d-flex flex-column">
         <div class="barra d-flex">
 
@@ -27,10 +27,17 @@
             <app-login></app-login>
 
         </div>
+
+        <div *ngIf="listPersona?.length == 0" class="profile">
+            <img src="assets/img/user.png" alt="" class="img-perfil img-fluid rounded-circle">
+            <h1 class=""><a href="">Nombre Apellido</a></h1>
+        </div>
         
-        <div class="profile">
-            <img src="{{persona.imgPerfil}}" alt="" class="img-perfil img-fluid rounded-circle">
-            <h1 class=""><a href="">{{persona.nombre}}</a></h1>
+        <div *ngIf="listPersona" class="profile">
+            <div *ngFor="let persona of listPersona">
+                <img src="{{persona.imgPerfil}}" alt="" class="img-perfil img-fluid rounded-circle">
+                <h1 class=""><a href="">{{persona.nombre}}</a></h1>
+            </div>
         </div>
         
         <nav id="navbar" class="nav-menu navbar">
@@ -49,68 +56,143 @@
     </div>
 </header>
 
-<section *ngIf="persona" id="persona" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url({{persona.imgPortada}})">
+<section *ngIf="listPersona?.length == 0" id="persona" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url(assets/img/fondo.jpg)">
     <div class="persona-container mostrarArriba" data-aos="fade-in">
         
         <div class="d-flex icon">
-            <h1>{{persona.nombre}}</h1>
-            <a *ngIf="isAdmin" (click)="editarPersona()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#PersonaModal"><i class="fas fa-edit"></i></a>
+            <h1>Nombre Apellido</h1>
+            <a *ngIf="isAdmin" (click)="nuevoPersona()" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#NuevoPersonaModal"><i class="fas fa-plus-square"></i></a>
         </div>
         
-        <p>{{persona.cargo}} <span class="typed" attr.data-typed-items="{{persona.tipoCargo}}"></span></p>
+        <p>Cargo <span class="typed" data-typed-items="Tipo, Cargo"></span></p>
 
     </div>
 </section>
 
-<!-- MODAL PERSONA -->
-<div class="modal fade form-modal" id="PersonaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div *ngIf="listPersona">
+    <section *ngFor="let persona of listPersona" id="persona" class="d-flex flex-column justify-content-center align-items-center" style="background-image: url({{persona.imgPortada}})">
+        <div class="persona-container mostrarArriba" data-aos="fade-in">
+            
+            <div class="d-flex icon">
+                <h1>{{persona.nombre}}</h1>
+                <div *ngIf="isAdmin" class="d-flex opciones">
+                    <a (click)="editarPersona(persona)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#EditarPersonaModal"><i class="fas fa-edit"></i></a>
+                    <a (click)="eliminarPersona(persona.id)" type="button" class="btn"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+
+            <p>{{persona.cargo}} <span class="typed" attr.data-typed-items="{{persona.tipoCargo}}"></span></p>
+
+        </div>
+    </section>
+</div>
+
+<!-- MODAL NUEVO -->
+<div class="modal fade form-modal" id="NuevoPersonaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             
             <div class="modal-header">
-                <h5 class="text-light">Persona</h5>
-                <button id="closeModalPersona" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="text-light">Nueva Persona</h5>
+                <button id="closeNuevoModalPersona" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>               
             <div class="modal-body">
-                <form [formGroup]="formPersona">
+                <form [formGroup]="formNuevo">
                     <div>
-                        <label for="nombrePersona" class="col-form-label text-light">Nombre y Apellido:</label>
-                        <input type="text" class="form-control" id="nombrePersona" formControlName="nombre">
-                        <div *ngIf="formPersona.get('nombre')?.invalid && (formPersona.get('nombre')?.dirty || formPersona.get('nombre')?.touched)">
-                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('nombre')?.hasError('required')">*Ingrese el nombre y apellido</small>
+                        <label for="nombrePersonaNuevo" class="col-form-label text-light">Nombre y Apellido:</label>
+                        <input type="text" class="form-control" id="nombrePersonaNuevo" formControlName="nombre">
+                        <div *ngIf="formNuevo.get('nombre')?.invalid && (formNuevo.get('nombre')?.dirty || formNuevo.get('nombre')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('nombre')?.hasError('required')">*Ingrese el nombre y apellido</small>
                         </div>
                     </div>
                     <div>
-                        <label for="imgPerfilPersona" class="col-form-label text-light">Foto de perfil:</label>
-                        <input type="text" class="form-control" id="imgPerfilPersona" formControlName="imgPerfil">
-                        <div *ngIf="formPersona.get('imgPerfil')?.invalid && (formPersona.get('imgPerfil')?.dirty || formPersona.get('imgPerfil')?.touched)">
-                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('imgPerfil')?.hasError('required')">*Ingrese la foto de perfil</small>
+                        <label for="imgPerfilPersonaNuevo" class="col-form-label text-light">Foto de perfil:</label>
+                        <input type="text" class="form-control" id="imgPerfilPersonaNuevo" formControlName="imgPerfil">
+                        <div *ngIf="formNuevo.get('imgPerfil')?.invalid && (formNuevo.get('imgPerfil')?.dirty || formNuevo.get('imgPerfil')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('imgPerfil')?.hasError('required')">*Ingrese la foto de perfil</small>
                         </div>
                     </div>
                     <div>
-                        <label for="imgPortadaPersona" class="col-form-label text-light">Foto de portada:</label>
-                        <input type="text" class="form-control" id="imgPortadaPersona" formControlName="imgPortada">
-                        <div *ngIf="formPersona.get('imgPortada')?.invalid && (formPersona.get('imgPortada')?.dirty || formPersona.get('imgPortada')?.touched)">
-                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('imgPortada')?.hasError('required')">*Ingrese la foto de portada</small>
+                        <label for="imgPortadaPersonaNuevo" class="col-form-label text-light">Foto de portada:</label>
+                        <input type="text" class="form-control" id="imgPortadaPersonaNuevo" formControlName="imgPortada">
+                        <div *ngIf="formNuevo.get('imgPortada')?.invalid && (formNuevo.get('imgPortada')?.dirty || formNuevo.get('imgPortada')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('imgPortada')?.hasError('required')">*Ingrese la foto de portada</small>
                         </div>
                     </div>
                     <div>
-                        <label for="cargoPersona" class="col-form-label text-light">Cargo:</label>
-                        <input type="text" class="form-control" id="cargoPersona" formControlName="cargo">
-                        <div *ngIf="formPersona.get('cargo')?.invalid && (formPersona.get('cargo')?.dirty || formPersona.get('cargo')?.touched)">
-                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('cargo')?.hasError('required')">*Ingrese el cargo</small>
+                        <label for="cargoPersonaNuevo" class="col-form-label text-light">Cargo:</label>
+                        <input type="text" class="form-control" id="cargoPersonaNuevo" formControlName="cargo">
+                        <div *ngIf="formNuevo.get('cargo')?.invalid && (formNuevo.get('cargo')?.dirty || formNuevo.get('cargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('cargo')?.hasError('required')">*Ingrese el cargo</small>
                         </div>
                     </div>
                     <div>
-                        <label for="tipoCargoPersona" class="col-form-label text-light">Tipo de cargo (ej. frontend, backend, fullstack):</label>
-                        <input type="text" class="form-control" id="tipoCargoPersona" formControlName="tipoCargo">
-                        <div *ngIf="formPersona.get('tipoCargo')?.invalid && (formPersona.get('tipoCargo')?.dirty || formPersona.get('tipoCargo')?.touched)">
-                            <small class="text-danger fw-bolder" *ngIf="formPersona.get('tipoCargo')?.hasError('required')">*Ingrese el tipo de cargo</small>
+                        <label for="tipoCargoPersonaNuevo" class="col-form-label text-light">Tipo de cargo (ej. frontend, backend, fullstack):</label>
+                        <input type="text" class="form-control" id="tipoCargoPersonaNuevo" formControlName="tipoCargo">
+                        <div *ngIf="formNuevo.get('tipoCargo')?.invalid && (formNuevo.get('tipoCargo')?.dirty || formNuevo.get('tipoCargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formNuevo.get('tipoCargo')?.hasError('required')">*Ingrese el tipo de cargo</small>
                         </div>
                     </div>
                     <div class="modal-footer mt-4"> 
-                        <button (click)="submitPersona()" [disabled]="this.formPersona.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                        <button (click)="submitPersona()" [disabled]="this.formNuevo.invalid" type="submit" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade form-modal" id="EditarPersonaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="text-light">Editar Persona</h5>
+                <button id="closeEditarModalPersona" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>               
+            <div class="modal-body">
+                <form [formGroup]="formEditar">
+                    <div>
+                        <label for="nombrePersonaEditar" class="col-form-label text-light">Nombre y Apellido:</label>
+                        <input type="text" class="form-control" id="nombrePersonaEditar" formControlName="nombre">
+                        <div *ngIf="formEditar.get('nombre')?.invalid && (formEditar.get('nombre')?.dirty || formEditar.get('nombre')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('nombre')?.hasError('required')">*Ingrese el nombre y apellido</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="imgPerfilPersonaEditar" class="col-form-label text-light">Foto de perfil:</label>
+                        <input type="text" class="form-control" id="imgPerfilPersonaEditar" formControlName="imgPerfil">
+                        <div *ngIf="formEditar.get('imgPerfil')?.invalid && (formEditar.get('imgPerfil')?.dirty || formEditar.get('imgPerfil')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('imgPerfil')?.hasError('required')">*Ingrese la foto de perfil</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="imgPortadaPersonaEditar" class="col-form-label text-light">Foto de portada:</label>
+                        <input type="text" class="form-control" id="imgPortadaPersonaEditar" formControlName="imgPortada">
+                        <div *ngIf="formEditar.get('imgPortada')?.invalid && (formEditar.get('imgPortada')?.dirty || formEditar.get('imgPortada')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('imgPortada')?.hasError('required')">*Ingrese la foto de portada</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="cargoPersonaEditar" class="col-form-label text-light">Cargo:</label>
+                        <input type="text" class="form-control" id="cargoPersonaEditar" formControlName="cargo">
+                        <div *ngIf="formEditar.get('cargo')?.invalid && (formEditar.get('cargo')?.dirty || formEditar.get('cargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('cargo')?.hasError('required')">*Ingrese el cargo</small>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="tipoCargoPersonaEditar" class="col-form-label text-light">Tipo de cargo (ej. frontend, backend, fullstack):</label>
+                        <input type="text" class="form-control" id="tipoCargoPersonaEditar" formControlName="tipoCargo">
+                        <div *ngIf="formEditar.get('tipoCargo')?.invalid && (formEditar.get('tipoCargo')?.dirty || formEditar.get('tipoCargo')?.touched)">
+                            <small class="text-danger fw-bolder" *ngIf="formEditar.get('tipoCargo')?.hasError('required')">*Ingrese el tipo de cargo</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-4"> 
+                        <button (click)="submitPersona()" [disabled]="this.formEditar.invalid" type="submit" class="btn btn-dark">Guardar</button>
                     </div>
                 </form>
             </div>

@@ -14,16 +14,16 @@ export class PersonaService {
     private httpClient: HttpClient
   ) { }
 
-  public view():Observable<Persona> {
-    return this.httpClient.get<Persona>(this.personaURL+'1');
+  public list():Observable<Persona[]> {
+    return this.httpClient.get<Persona[]>(this.personaURL+'list');
   }
 
-  public save(persona:Persona):Observable<any>{
+  public save(persona:any):Observable<any>{
     return this.httpClient.post<any>(this.personaURL+'save', persona);
   }
 
-  public update(persona:Persona):Observable<any>{
-    return this.httpClient.put<any>(this.personaURL+'update', persona);
+  public update(id:number, persona:any):Observable<any>{
+    return this.httpClient.put<any>(this.personaURL+'update/'+id,persona);
   }
 
   public delete(id:number):Observable<any>{

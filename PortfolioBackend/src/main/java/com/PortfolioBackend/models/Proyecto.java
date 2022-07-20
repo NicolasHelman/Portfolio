@@ -1,9 +1,15 @@
 package com.PortfolioBackend.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.PortfolioBackend.security.models.Usuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Proyecto {
@@ -16,18 +22,24 @@ public class Proyecto {
     private String imgProyecto;
     private String urlProyecto;
     private String githubProyecto;
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "usuario_id")
+	@JsonBackReference
+	private Usuario usuario;
     
     public Proyecto() {
     	
     }
 
-	public Proyecto(Long id, String nombre, String descripcion, String imgProyecto, String urlProyecto, String githubProyecto) {
+	public Proyecto(Long id, String nombre, String descripcion, String imgProyecto, String urlProyecto,
+			String githubProyecto, Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.imgProyecto = imgProyecto;
 		this.urlProyecto = urlProyecto;
 		this.githubProyecto = githubProyecto;
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -76,6 +88,14 @@ public class Proyecto {
 
 	public void setGithubProyecto(String githubProyecto) {
 		this.githubProyecto = githubProyecto;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

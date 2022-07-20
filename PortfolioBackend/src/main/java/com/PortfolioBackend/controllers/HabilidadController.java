@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.PortfolioBackend.models.Habilidad;
+import com.PortfolioBackend.security.models.Usuario;
+import com.PortfolioBackend.security.services.UsuarioService;
 import com.PortfolioBackend.services.HabilidadService;
 
 @RestController
@@ -28,6 +30,9 @@ public class HabilidadController {
 	@Autowired
 	private HabilidadService habilidadService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@ResponseBody
 	@GetMapping("/list")
     public List<Habilidad> list() {
@@ -37,6 +42,10 @@ public class HabilidadController {
 	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<Habilidad> save(@RequestBody Habilidad habilidad) {
+		
+		Usuario usuario = usuarioService.findBySesionUsuario();
+		
+		habilidad.setUsuario(usuario);
     	
     	habilidadService.save(habilidad);
         

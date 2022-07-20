@@ -1,13 +1,21 @@
 package com.PortfolioBackend.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.PortfolioBackend.security.models.Usuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Persona {
+	
+	//cascade = CascadeType.ALL -> le hereda los metodos del jpa a la tabla
+	//orphanRemoval = true -> Cuando se edita, los elementos que fueron eliminados de la entity son borrados de la DB
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,18 +25,24 @@ public class Persona {
     private String imgPortada;
     private String cargo;
     private String tipoCargo;
-     
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "usuario_id")
+	@JsonBackReference
+	private Usuario usuario;
+  
     public Persona() {
     	
     }
 
-	public Persona(Long id, String nombre, String imgPerfil, String imgPortada, String cargo, String tipoCargo) {
+	public Persona(Long id, String nombre, String imgPerfil, String imgPortada, String cargo, String tipoCargo,
+			Usuario usuario) {
 		this.id = id;
 		this.nombre = nombre;
 		this.imgPerfil = imgPerfil;
 		this.imgPortada = imgPortada;
 		this.cargo = cargo;
 		this.tipoCargo = tipoCargo;
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -78,6 +92,13 @@ public class Persona {
 	public void setTipoCargo(String tipoCargo) {
 		this.tipoCargo = tipoCargo;
 	}
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 }

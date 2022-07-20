@@ -1,5 +1,7 @@
 package com.PortfolioBackend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.PortfolioBackend.models.Persona;
+import com.PortfolioBackend.security.models.Usuario;
+import com.PortfolioBackend.security.services.UsuarioService;
 import com.PortfolioBackend.services.PersonaService;
 
 @RestController
@@ -25,27 +30,41 @@ public class PersonaController {
 	@Autowired
 	private PersonaService personaService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@ResponseBody
-	@GetMapping("/{id}")
-    public ResponseEntity<Persona> view(@PathVariable Long id) {
-		Persona persona = personaService.findById(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(persona);
+	@GetMapping("/list")
+    public List<Persona> list() {
+		return personaService.list();
     }
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/save")
     public ResponseEntity<Persona> save(@RequestBody Persona persona) {
-		Persona p = personaService.findById(persona.getId());
-		personaService.save(p);
+	
+		Usuario usuario = usuarioService.findBySesionUsuario();
 		
-		return ResponseEntity.status(HttpStatus.OK).body(p);
+		persona.setUsuario(usuario);
+		
+		personaService.save(persona);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(persona);
     }
     
 	@PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/update")
-    public ResponseEntity<Persona> update(@RequestBody Persona persona) {
-        personaService.save(persona); 
+	@PutMapping("/update/{id}")
+    public ResponseEntity<Persona> update(@PathVariable Long id, @RequestBody Persona p) {
+        
+		Persona persona = personaService.findById(id);
+		
+		persona.setNombre(p.getNombre());
+		persona.setImgPerfil(p.getImgPerfil());
+		persona.setImgPortada(p.getImgPortada());
+		persona.setCargo(p.getCargo());
+		persona.setTipoCargo(p.getTipoCargo());
+
+		personaService.save(persona);
         
         return ResponseEntity.status(HttpStatus.OK).body(persona);
     }
@@ -54,6 +73,7 @@ public class PersonaController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Persona> delete(@PathVariable Long id) {
     	personaService.delete(id);
+    	
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.PortfolioBackend.models.Proyecto;
+import com.PortfolioBackend.security.models.Usuario;
+import com.PortfolioBackend.security.services.UsuarioService;
 import com.PortfolioBackend.services.ProyectoService;
 
 @RestController
@@ -28,6 +30,9 @@ public class ProyectoController {
 	@Autowired
 	private ProyectoService proyectoService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@ResponseBody
 	@GetMapping("/list")
     public List<Proyecto> list() {
@@ -36,7 +41,12 @@ public class ProyectoController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
-    public ResponseEntity<Proyecto> save(@RequestBody Proyecto proyecto) {    
+    public ResponseEntity<Proyecto> save(@RequestBody Proyecto proyecto) {
+		
+		Usuario usuario = usuarioService.findBySesionUsuario();
+		
+		proyecto.setUsuario(usuario);
+		
     	proyectoService.save(proyecto);
         
         return ResponseEntity.status(HttpStatus.CREATED).body(proyecto);

@@ -15,7 +15,7 @@ export class AcercaDeService {
   ) { }
 
   public list():Observable<AcercaDe[]> {
-    return this.httpClient.get<AcercaDe[]>(this.acercaDeURL +'list');
+    return this.httpClient.get<AcercaDe[]>(this.acercaDeURL+'list');
   }
 
   public save(acercaDe:any):Observable<any>{

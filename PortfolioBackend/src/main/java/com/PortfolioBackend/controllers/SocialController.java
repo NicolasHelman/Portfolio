@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.PortfolioBackend.models.Social;
+import com.PortfolioBackend.security.models.Usuario;
+import com.PortfolioBackend.security.services.UsuarioService;
 import com.PortfolioBackend.services.SocialService;
 
 @RestController
@@ -28,6 +30,9 @@ public class SocialController {
 	@Autowired
 	private SocialService socialService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@ResponseBody
 	@GetMapping("/list")
     public List<Social> list() {
@@ -37,6 +42,10 @@ public class SocialController {
 	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<Social> save(@RequestBody Social social) {
+		
+		Usuario usuario = usuarioService.findBySesionUsuario();
+		
+		social.setUsuario(usuario);
     	
     	socialService.save(social);
         

@@ -1,9 +1,15 @@
 package com.PortfolioBackend.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.PortfolioBackend.security.models.Usuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class AcercaDe {
@@ -16,19 +22,24 @@ public class AcercaDe {
     private String ciudad;
     private String telefono;
     private String mail;
-    
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "usuario_id")
+	@JsonBackReference
+	private Usuario usuario;
     
     public AcercaDe() {
     	
     }
 
-	public AcercaDe(Long id, String descripcion, String fechaNacimiento, String ciudad, String telefono, String mail) {
+	public AcercaDe(Long id, String descripcion, String fechaNacimiento, String ciudad, String telefono, String mail,
+			Usuario usuario) {
 		this.id = id;
 		this.descripcion = descripcion;
 		this.fechaNacimiento = fechaNacimiento;
 		this.ciudad = ciudad;
 		this.telefono = telefono;
 		this.mail = mail;
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -79,4 +90,11 @@ public class AcercaDe {
 		this.mail = mail;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

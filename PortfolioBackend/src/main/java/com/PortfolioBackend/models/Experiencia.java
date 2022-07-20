@@ -1,9 +1,15 @@
 package com.PortfolioBackend.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.PortfolioBackend.security.models.Usuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Experiencia {
@@ -16,18 +22,24 @@ public class Experiencia {
     private String fechaInicio;
     private String fechaFin;
     private String imgEmpresa;
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "usuario_id")
+	@JsonBackReference
+	private Usuario usuario;
     
     public Experiencia() {
     	
     }
 
-	public Experiencia(Long id, String empresa, String cargo, String fechaInicio, String fechaFin, String imgEmpresa) {
+	public Experiencia(Long id, String empresa, String cargo, String fechaInicio, String fechaFin, String imgEmpresa,
+			Usuario usuario) {
 		this.id = id;
 		this.empresa = empresa;
 		this.cargo = cargo;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.imgEmpresa = imgEmpresa;
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -76,6 +88,14 @@ public class Experiencia {
 
 	public void setImgEmpresa(String imgEmpresa) {
 		this.imgEmpresa = imgEmpresa;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

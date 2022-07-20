@@ -12,10 +12,12 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class PersonaComponent implements OnInit {
 
-  persona!: Persona;
-  formPersona: FormGroup;
-  isLogged = false;
+  listPersona!: Persona[];
+  formNuevo: FormGroup;
+  formEditar: FormGroup;
+  id: number | undefined;
   isAdmin = false;
+  isLogged = false;
 
   constructor(
     private personaService: PersonaService,
@@ -23,7 +25,14 @@ export class PersonaComponent implements OnInit {
     private toastr: ToastrService,
     private tokenService: TokenService
   ) { 
-    this.formPersona = this.formBuilder.group({
+    this.formNuevo = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      imgPerfil: ['', [Validators.required]],
+      imgPortada:['', [Validators.required]],
+      cargo: ['', [Validators.required]],
+      tipoCargo: ['', [Validators.required]],
+    });
+    this.formEditar = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       imgPerfil: ['', [Validators.required]],
       imgPortada:['', [Validators.required]],
@@ -33,60 +42,98 @@ export class PersonaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.view();
-    this.isLogged = this.tokenService.isLogged();
+    this.list();
     this.isAdmin = this.tokenService.isAdmin();
+    this.isLogged = this.tokenService.isLogged();
   }
 
-  view(): void {
-    this.personaService.view().subscribe(
+  list(): void {
+    this.personaService.list().subscribe(
       data => {
-        this.persona = data;
+        this.listPersona = data;
       }
     )
   };
 
   submitPersona() {
-    if(this.formPersona.valid){
-    
-      let nombre = this.formPersona.controls["nombre"].value;
-      let imgPerfil = this.formPersona.controls["imgPerfil"].value;
-      let imgPortada = this.formPersona.controls["imgPortada"].value;
-      let cargo = this.formPersona.controls["cargo"].value;
-      let tipoCargo = this.formPersona.controls["tipoCargo"].value;
-    
-      let personaEditar = new Persona(this.persona.id, nombre, imgPerfil, imgPortada, cargo, tipoCargo);
-    
-      this.personaService.update(personaEditar).subscribe(data=>{
-        this.persona = personaEditar;
-        this.toastr.info('Persona actualizada', 'Persona');
-        
+
+    if(this.id == undefined){
+
+      const personaNuevo: any = {
+        nombre: this.formNuevo.get('nombre')?.value,
+        imgPerfil: this.formNuevo.get('imgPerfil')?.value,
+        imgPortada: this.formNuevo.get('imgPortada')?.value,
+        cargo: this.formNuevo.get('cargo')?.value,
+        tipoCargo: this.formNuevo.get('tipoCargo')?.value
+      }
+
+      this.personaService.save(personaNuevo).subscribe(data=>{
+
+        this.toastr.success('Persona registrada', 'Persona');     
         this.closeForm();
 
       }, error => {
-        this.toastr.error('Ocurrió un error','Error'); 
+        this.toastr.error('Ocurrió un error','Error');
       })
 
     } else{
-      this.formPersona.markAllAsTouched();
+
+      const personaEditar: any = {
+        nombre: this.formEditar.get('nombre')?.value,
+        imgPerfil: this.formEditar.get('imgPerfil')?.value,
+        imgPortada: this.formEditar.get('imgPortada')?.value,
+        cargo: this.formEditar.get('cargo')?.value,
+        tipoCargo: this.formEditar.get('tipoCargo')?.value
+      }
+
+      personaEditar.id = this.id;
+    
+      this.personaService.update(this.id, personaEditar).subscribe(data=>{
+
+        this.toastr.info('Persona actualizada', 'Persona');
+        this.closeForm();
+
+      }, error => {
+        this.toastr.error('Ocurrió un error','Error');
+      })
     }
   }
 
-  editarPersona(){
-    this.formPersona.controls["nombre"].setValue(this.persona.nombre);
-    this.formPersona.controls["imgPerfil"].setValue(this.persona.imgPerfil);
-    this.formPersona.controls["imgPortada"].setValue(this.persona.imgPortada);
-    this.formPersona.controls["cargo"].setValue(this.persona.cargo);
-    this.formPersona.controls["tipoCargo"].setValue(this.persona.tipoCargo);
+  nuevoPersona() {
+    this.id = undefined;
+  }
+
+  editarPersona(persona: any) {
+    this.id = persona.id;
+    
+    this.formEditar.patchValue({
+      nombre: persona.nombre,
+      imgPerfil: persona.imgPerfil,
+      imgPortada: persona.imgPortada,
+      cargo: persona.cargo,
+      tipoCargo: persona.tipoCargo
+    })
+
+  }
+
+  eliminarPersona(id: number){
+    this.personaService.delete(id).subscribe(data => {
+      this.toastr.error('Persona eliminada','Persona');
+      this.list();
+    })
+  }
+
+  closeForm(): void{
+    this.formNuevo.reset();
+    this.formEditar.reset();
+    document.getElementById('closeNuevoModalPersona')?.click();
+    document.getElementById('closeEditarModalPersona')?.click();
+    this.list();
   }
 
   logout(): void {
     this.tokenService.logOut();
     window.location.reload();
-  }
-
-  closeForm(): void{
-    document.getElementById("closeModalPersona")?.click();
   }
 
 }
