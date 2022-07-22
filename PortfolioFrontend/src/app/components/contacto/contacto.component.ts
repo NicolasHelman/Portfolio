@@ -43,7 +43,7 @@ export class ContactoComponent implements OnInit {
       this.formContacto.reset();
 
     }, error => {
-      this.toastr.error('Debe estar logeado para enviar el mensaje','Error');
+      this.toastr.error('Debes estar logueado para enviar el mensaje','Error');
     })
 
   }
